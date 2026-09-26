@@ -2,7 +2,7 @@
 
 Material de la charla **DevFest 2026** (Kevin Morales): macros pensadas para producción, una app iOS para enseñarlas en vivo y un CLI para explorarlas sin red.
 
-El código, los identificadores y la salida del CLI están en **inglés**. Este README es la guía en español.
+El código, los identificadores de macros y la salida del CLI están en **inglés**. La **UI de la app iOS** y este README van en **español** (contraste *Sin macro* / *Con macro* en pantalla).
 
 ---
 
