@@ -151,14 +151,14 @@ extension DemoCLI {
 
     static func level6_Endpoint() {
         section("LEVEL 6 — Producción: @Endpoint")
-        let endpoint = GetRestaurants(city: "London", limit: 5)
+        let endpoint = GetRestaurants(city: "San José", limit: 5)
         print("  \(endpoint.requestDescription)")
         print("  query: \(endpoint.queryItems)")
         let client = InMemoryHTTPClient()
         do {
             try client.stub(
                 GetRestaurants.endpointID,
-                response: .init(jsonObject: ["restaurants": ["Dishoom", "Padella"]])
+                response: .init(jsonObject: ["restaurants": ["Soda Tapia", "Silvestre"]])
             )
             let response = try client.send(endpoint)
             let text = String(data: response.body, encoding: .utf8) ?? ""
@@ -245,7 +245,7 @@ extension DemoCLI {
             """
         )
 
-        let endpoint = GetRestaurants(city: "Leeds", limit: 3)
+        let endpoint = GetRestaurants(city: "San José", limit: 3)
         print("── 3. LO QUE GENERÓ EL COMPILADOR (Expand Macro conceptual) ───────")
         print(generatedEndpointExpansionPrintout())
         print("── 4. RUNTIME (InMemoryHTTPClient totalmente offline) ─────────────")
@@ -256,8 +256,8 @@ extension DemoCLI {
             try client.stub(
                 "GetRestaurants",
                 response: .init(jsonObject: [
-                    "city": "Leeds",
-                    "highlights": ["SwiftLeeds", "Tiled Hall", "Belgrave Music Hall"],
+                    "city": "San José",
+                    "highlights": ["DevFest 2026", "Casado", "Gallo Pinto"],
                 ])
             )
             let response = try client.send(endpoint)

@@ -71,7 +71,7 @@ final class DemoSession {
         appendAnalytics(event)
     }
 
-    func loadRestaurants(city: String = "London") {
+    func loadRestaurants(city: String = "San José") {
         let endpoint = GetRestaurants(city: city, limit: 5)
         lastRequestDescription = endpoint.requestDescription
         do {
@@ -93,7 +93,7 @@ final class DemoSession {
     }
 
     func fireAnalyticsDemo() {
-        let event = RestaurantOpened(restaurantID: "dishoom", source: "stage_tap")
+        let event = RestaurantOpened(restaurantID: "soda-tapia", source: "stage_tap")
         analytics.track(event)
         appendAnalytics(event)
         statusMessage = "Eventos registrados: \(analytics.events.count)"
@@ -110,8 +110,8 @@ final class DemoSession {
 
         var builder = RestaurantBuilder()
         builder.id = "r2"
-        builder.name = "Dishoom"
-        builder.city = "London"
+        builder.name = "Soda Tapia"
+        builder.city = "San José"
         builder.rating = 4.9
         let viaBuilder = builder.build()
         builderSample = "\(viaBuilder.name) · \(viaBuilder.city)"
@@ -140,13 +140,13 @@ final class DemoSession {
         try? http.stub(
             GetRestaurants.endpointID,
             response: .init(jsonObject: [
-                "city": "London",
+                "city": "San José",
                 "restaurants": [
-                    ["id": "dishoom", "name": "Dishoom", "city": "London", "rating": 4.8],
-                    ["id": "padella", "name": "Padella", "city": "London", "rating": 4.7],
-                    ["id": "bao", "name": "Bao", "city": "London", "rating": 4.5],
-                    ["id": "stjohn", "name": "St. JOHN", "city": "London", "rating": 4.6],
-                    ["id": "brat", "name": "Brat", "city": "London", "rating": 4.4],
+                    ["id": "soda-tapia", "name": "Soda Tapia", "city": "San José", "rating": 4.8],
+                    ["id": "la-esquin", "name": "La Esquina de Buenos Aires", "city": "San José", "rating": 4.7],
+                    ["id": "silvestre", "name": "Silvestre", "city": "San José", "rating": 4.5],
+                    ["id": "raco", "name": "Raco", "city": "San José", "rating": 4.6],
+                    ["id": "almanza", "name": "Almanza", "city": "San José", "rating": 4.4],
                 ],
             ])
         )

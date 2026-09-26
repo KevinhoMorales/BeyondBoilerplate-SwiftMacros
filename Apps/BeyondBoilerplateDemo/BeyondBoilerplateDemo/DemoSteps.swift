@@ -56,8 +56,8 @@ struct RestaurantsStepView: View {
                 Text("Anotado en DemoModels.swift — Expand Macro en @Endpoint para mostrar witnesses generados de EndpointProtocol.")
                     .font(.footnote)
                     .foregroundStyle(.secondary)
-                Button("Cargar restaurantes (London)") {
-                    session.loadRestaurants(city: "London")
+                Button("Cargar restaurantes (San José)") {
+                    session.loadRestaurants(city: "San José")
                 }
                 .buttonStyle(.borderedProminent)
                 if !session.lastRequestDescription.isEmpty {
