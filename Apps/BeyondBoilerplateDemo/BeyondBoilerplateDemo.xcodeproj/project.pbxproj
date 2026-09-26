@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		131ECB145BDE5C84CD2D6221 /* DemoModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B724D311C32DDC15EB873 /* DemoModels.swift */; };
+		2A8F1C9E4B7D30A6E15C80F2 /* DemoCodeSamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4E2B71A8D05F36C4E19A07 /* DemoCodeSamples.swift */; };
 		5ECA7915BC216AB6F4598648 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C48D6C2371303BAA75291FC8 /* Assets.xcassets */; };
 		682AB6CF541EAA1BFB0B081C /* BeyondBoilerplateMacrosClient in Frameworks */ = {isa = PBXBuildFile; productRef = FDACBA1506AEFFCB129CB14C /* BeyondBoilerplateMacrosClient */; };
 		7DBFC130BC6D14944ECF4C08 /* DemoSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F774F0DC776B0BC4CA764BA /* DemoSession.swift */; };
@@ -20,6 +21,7 @@
 /* Begin PBXFileReference section */
 		37AC4C2B53F04CFA3DD0244E /* DemoSteps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoSteps.swift; sourceTree = "<group>"; };
 		4F774F0DC776B0BC4CA764BA /* DemoSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoSession.swift; sourceTree = "<group>"; };
+		9C4E2B71A8D05F36C4E19A07 /* DemoCodeSamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoCodeSamples.swift; sourceTree = "<group>"; };
 		6275CA3A66E5A5551F9AE061 /* BeyondBoilerplateDemo.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = BeyondBoilerplateDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		98ACD909A0E83EB0A76A3F76 /* BeyondBoilerplateDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeyondBoilerplateDemoApp.swift; sourceTree = "<group>"; };
 		AB3B14A5A6A6A63BDCFADAF2 /* DemoRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoRootView.swift; sourceTree = "<group>"; };
@@ -46,6 +48,7 @@
 			children = (
 				C48D6C2371303BAA75291FC8 /* Assets.xcassets */,
 				98ACD909A0E83EB0A76A3F76 /* BeyondBoilerplateDemoApp.swift */,
+				9C4E2B71A8D05F36C4E19A07 /* DemoCodeSamples.swift */,
 				E19B724D311C32DDC15EB873 /* DemoModels.swift */,
 				AB3B14A5A6A6A63BDCFADAF2 /* DemoRootView.swift */,
 				4F774F0DC776B0BC4CA764BA /* DemoSession.swift */,
@@ -157,6 +160,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5CEBE5921BF25CA560AA201 /* BeyondBoilerplateDemoApp.swift in Sources */,
+				2A8F1C9E4B7D30A6E15C80F2 /* DemoCodeSamples.swift in Sources */,
 				131ECB145BDE5C84CD2D6221 /* DemoModels.swift in Sources */,
 				C12E507890B58FE1F0353A03 /* DemoRootView.swift in Sources */,
 				7DBFC130BC6D14944ECF4C08 /* DemoSession.swift in Sources */,

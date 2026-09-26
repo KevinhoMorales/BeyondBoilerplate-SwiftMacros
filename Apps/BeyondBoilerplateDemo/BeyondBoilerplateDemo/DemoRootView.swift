@@ -15,10 +15,12 @@ struct DemoRootView: View {
                         .foregroundStyle(.secondary)
                         .lineLimit(2)
                 }
+                .padding(.vertical, 2)
                 .tag(step)
             }
             .navigationTitle("Beyond Boilerplate")
             .navigationBarTitleDisplayMode(.inline)
+            .listStyle(.sidebar)
         } detail: {
             Group {
                 if let selection {
@@ -28,9 +30,12 @@ struct DemoRootView: View {
                         .onAppear { session.onAppear(step: selection) }
                 } else {
                     ContentUnavailableView(
-                        "Elige un paso de demo",
+                        "Elige un paso",
                         systemImage: "sparkles",
-                        description: Text("Empieza con Bienvenida, luego recorre @Endpoint → analytics → DI.")
+                        description: Text(
+                            "Empieza en Bienvenida, luego camina @Endpoint → analytics → DI. "
+                                + "Cada paso compara Sin macro / Con macro."
+                        )
                     )
                 }
             }

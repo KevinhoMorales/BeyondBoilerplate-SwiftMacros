@@ -167,6 +167,8 @@ open Apps/BeyondBoilerplateDemo/BeyondBoilerplateDemo.xcodeproj
 Scheme **BeyondBoilerplateDemo** → Simulator iOS 17+ → Run.  
 El target enlaza el paquete local (`BeyondBoilerplateMacrosClient` + `DemoSupport`).
 
+**Flujo de la app (UI en español):** Bienvenida → **1 · @Endpoint** (WOW: control *Sin macro* / *Con macro* + código de ejemplo + fetch offline) → `@AnalyticsEvent` → `@AutoInit` → `@AutoRegister` → Cuándo no usar macros. En cada paso clave ves el mismo concepto como fuente monoespaciada y luego ejecutas el camino real en `DemoModels.swift`.
+
 **Paquete / CLI:**
 
 ```bash
@@ -188,7 +190,7 @@ Todo **offline** (stub en memoria). Sin frameworks de DI de terceros.
 2. Haz clic en el atributo (`@Endpoint`, `@AnalyticsEvent`, `@AutoInit`, …).
 3. **Editor → Expand Macro** (o clic derecho → **Expand Macro**).
 
-En la charla: deja la hoja de expansión abierta mientras usas la UI — el público ve el código en compile-time y el comportamiento en runtime a la vez.
+En la charla: deja la hoja de expansión abierta mientras usas la UI (cambia *Sin macro* / *Con macro*, luego la acción en vivo) — el público ve el código de ejemplo, la expansión en compile-time y el comportamiento en runtime a la vez.
 
 ---
 
@@ -217,4 +219,4 @@ Estudio / `swift test` / CLI → `Package.swift`. Expand Macro + Simulator → e
 Material educativo de la charla DevFest 2026 — **Kevin Morales**.  
 Puedes forkarlo para talleres; mantén la atribución si reutilizas el material en abstracts.
 
-**Arranque en escenario:** `open Apps/BeyondBoilerplateDemo/BeyondBoilerplateDemo.xcodeproj` → Run → Expand Macro sobre `@Endpoint` en `DemoModels.swift`.
+**Arranque en escenario:** `open Apps/BeyondBoilerplateDemo/BeyondBoilerplateDemo.xcodeproj` → Run → paso **1 · @Endpoint** (*Sin macro* → *Con macro* → Cargar restaurantes) → Expand Macro sobre `@Endpoint` en `DemoModels.swift`.

@@ -9,11 +9,12 @@ Usa esta carpeta para notas de speaker, cues de slides o abstracts sin hinchar e
 2. Cuándo valen la pena (y cuándo no) + checks en compile-time
 3. Freestanding vs attached; member / peer / accessor / extension
 4. Qué hay en el repo (app + package + macros a probar)
-5. Expand Macro en Xcode + UI de la app iOS
-6. WOW: lista de restaurantes en la app + Expand Macro sobre `@Endpoint` (`DemoModels.swift`)
+5. Expand Macro en Xcode + UI iOS con contraste *Sin macro* / *Con macro*
+6. WOW: paso `@Endpoint` (código de ejemplo → Expand Macro → lista de restaurantes)
 7. Opcional: salida de DemoCLI `wow`
 
 ## Nota de entrega (DevFest 2026)
 
-Código, comentarios, CLI e identificadores del UI iOS permanecen en **inglés**.  
-La explicación oral y el README van en español; en pantalla apunta al texto inglés de Expand Macro.
+**Strings de la UI iOS en español** (segmentado *Sin macro* / *Con macro*, captions, botones).  
+Nombres de macros, el Swift de ejemplo, Expand Macro, package y CLI siguen en inglés.  
+En escenario: empieza por el paso 1 · @Endpoint — toggle del contraste, Expand Macro, luego Cargar.

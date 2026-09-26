@@ -31,15 +31,15 @@ final class DemoSession {
         var subtitle: String {
             switch self {
             case .welcome:
-                "Lab iOS progresivo — expande macros en Xcode, recorre demos offline."
+                "Recorrido iOS — contraste Sin/Con macro, Expand Macro en Xcode."
             case .restaurants:
-                "Obtén restaurantes vía EndpointProtocol generado + InMemoryHTTPClient."
+                "WOW: boilerplate de Endpoint frente a @Endpoint + fetch offline."
             case .analytics:
-                "Dispara eventos tipados; sin SDK de vendor — solo un sink en memoria."
+                "Eventos tipados; sin SDK — solo un sink en memoria."
             case .autoInit:
                 "Init memberwise (y peers) sintetizados en compile-time."
             case .dependencyInjection:
-                "Registro DI educativo — debate magia vs roots explícitos."
+                "Registro DI educativo — magia vs composition roots."
             case .takeaway:
                 "Los macros eliminan boilerplate estructural — no reglas de negocio."
             }
@@ -118,8 +118,8 @@ final class DemoSession {
 
         var volume = VolumeControl()
         volume.percentage = 99
-        clampNote = "Clamped 99 → \(volume.percentage) (max 10)"
-        statusMessage = "@AutoInit / @MakeBuilder / @Clamped ejercitados"
+        clampNote = "Clamped 99 → \(volume.percentage) (máx. 10)"
+        statusMessage = "@AutoInit / @MakeBuilder / @Clamped ejercidos"
     }
 
     func resolveMenuRepository() {

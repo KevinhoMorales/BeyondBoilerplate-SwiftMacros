@@ -6,6 +6,9 @@ import Foundation
 //
 // En Xcode: haz clic en un atributo → Editor → Expand Macro
 // Demos en vivo preferidas: @Endpoint, @AnalyticsEvent, @AutoInit
+//
+// La UI de la app muestra muestras “Sin macro / Con macro” como texto;
+// estas anotaciones son el camino real “Con macro” — mantenlas para Expand Macro.
 
 @AutoInit
 @MakeBuilder
