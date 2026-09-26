@@ -2,16 +2,16 @@ import SwiftSyntax
 import SwiftSyntaxBuilder
 import SwiftSyntaxMacros
 
-/// Level 5 — ExtensionMacro (+ MemberMacro for `==`).
+/// Level 5 — ExtensionMacro (+ MemberMacro para `==`).
 ///
-/// `@AutoEquatable` adds `Equatable` conformance by comparing stored properties.
-/// Teaching goal: ExtensionMacro is the right tool when you need a conformance *outside*
-/// the type body. MemberMacro alone cannot declare `extension Foo: Equatable`.
+/// `@AutoEquatable` añade conformance `Equatable` comparando propiedades almacenadas.
+/// Objetivo didáctico: ExtensionMacro es la herramienta correcta cuando necesitas una conformance *fuera*
+/// del cuerpo del tipo. MemberMacro solo no puede declarar `extension Foo: Equatable`.
 ///
-/// LIMITATIONS (say this on stage):
-/// - Does not handle reference types / identity equality.
-/// - Does not synthesize Hashable or Codable (those need different algorithms and failure modes).
-/// - Skips computed properties — only stored state participates.
+/// LIMITACIONES (dílo en el escenario):
+/// - No maneja tipos por referencia / igualdad de identidad.
+/// - No sintetiza Hashable ni Codable (necesitan algoritmos y modos de fallo distintos).
+/// - Omite propiedades computed — solo participa el estado almacenado.
 public struct AutoEquatableMacro: ExtensionMacro, MemberMacro {
     public static func expansion(
         of node: AttributeSyntax,
@@ -31,10 +31,10 @@ public struct AutoEquatableMacro: ExtensionMacro, MemberMacro {
             return []
         }
 
-        // ExtensionMacro supplies the conformance; MemberMacro supplies `static func ==`.
-        // When both roles are present, Swift may ask ExtensionMacro to only declare
-        // the conformance and MemberMacro to add the witness — we emit `==` in the extension
-        // for a single readable expansion students can Expand Macro on.
+        // ExtensionMacro aporta la conformance; MemberMacro aportaría `static func ==`.
+        // Cuando ambos roles están presentes, Swift puede pedir a ExtensionMacro que solo declare
+        // la conformance y a MemberMacro que añada el witness — emitimos `==` en la extension
+        // para una sola expansión legible que los estudiantes puedan Expand Macro.
         let comparisons = properties.map { property in
             "lhs.\(property.name) == rhs.\(property.name)"
         }.joined(separator: " && ")
@@ -52,9 +52,9 @@ public struct AutoEquatableMacro: ExtensionMacro, MemberMacro {
         return [extensionDecl]
     }
 
-    /// MemberMacro role is intentionally a no-op: `==` lives in the generated extension
-    /// so Expand Macro shows one cohesive block. Keeping the protocol conformance
-    /// documents that multi-role macros can split work across roles when needed.
+    /// El rol MemberMacro es intencionalmente no-op: `==` vive en la extension generada
+    /// para que Expand Macro muestre un bloque cohesivo. Mantener la conformance del protocolo
+    /// documenta que los macros multi-role pueden repartir trabajo entre roles cuando hace falta.
     public static func expansion(
         of node: AttributeSyntax,
         providingMembersOf declaration: some DeclGroupSyntax,

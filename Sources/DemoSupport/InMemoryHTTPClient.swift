@@ -1,10 +1,10 @@
 import Foundation
 
-/// Offline stand-in for URLSession.
+/// Sustituto offline de URLSession.
 ///
-/// Conference constraint: demos must not require network access.
-/// Responses are looked up by endpoint ID / path so Kevin can show a full request
-/// lifecycle without leaving the stage Wi-Fi lottery.
+/// Restricción de conferencia: las demos no deben requerir acceso a red.
+/// Las respuestas se buscan por endpoint ID / path para que Kevin pueda mostrar un ciclo
+/// completo de petición sin depender de la lotería del Wi-Fi del escenario.
 public final class InMemoryHTTPClient: @unchecked Sendable {
     public struct StubResponse: Sendable {
         public let statusCode: Int
@@ -40,7 +40,7 @@ public final class InMemoryHTTPClient: @unchecked Sendable {
             return response
         }
 
-        // Friendly default so demos keep moving even if a stub was forgotten.
+        // Default amigable para que las demos sigan avanzando aunque se haya olvidado un stub.
         return try StubResponse(
             statusCode: 200,
             jsonObject: [
@@ -48,7 +48,7 @@ public final class InMemoryHTTPClient: @unchecked Sendable {
                 "path": endpoint.path,
                 "method": endpoint.method.rawValue,
                 "query": Dictionary(uniqueKeysWithValues: endpoint.queryItems.map { ($0.name, $0.value ?? "") }),
-                "note": "No stub registered — returning echo payload.",
+                "note": "No hay stub registrado — devolviendo payload eco.",
             ]
         )
     }

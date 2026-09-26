@@ -2,10 +2,10 @@ import BeyondBoilerplateMacrosClient
 import DemoSupport
 import Foundation
 
-// MARK: - Expand Macro targets (stage talk)
+// MARK: - Objetivos de Expand Macro (charla en escenario)
 //
-// In Xcode: click an attribute → Editor → Expand Macro
-// Preferred live demos: @Endpoint, @AnalyticsEvent, @AutoInit
+// En Xcode: haz clic en un atributo → Editor → Expand Macro
+// Demos en vivo preferidas: @Endpoint, @AnalyticsEvent, @AutoInit
 
 @AutoInit
 @MakeBuilder

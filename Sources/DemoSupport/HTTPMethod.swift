@@ -1,6 +1,6 @@
 import Foundation
 
-/// HTTP verbs used by `@Endpoint` expansions and the offline client.
+/// Verbos HTTP usados por las expansiones de `@Endpoint` y el cliente offline.
 public enum HTTPMethod: String, Sendable, CaseIterable {
     case get = "GET"
     case post = "POST"
@@ -9,11 +9,11 @@ public enum HTTPMethod: String, Sendable, CaseIterable {
     case delete = "DELETE"
 }
 
-/// Minimal protocol that `@Endpoint` conformances satisfy.
+/// Protocolo mínimo que satisfacen las conformances de `@Endpoint`.
 ///
-/// Keep this intentionally small: production apps often add headers, body encoding,
-/// auth hooks, and response decoding — those belong in real networking layers,
-/// not in a conference macro demo.
+/// Mantén esto intencionalmente pequeño: las apps de producción suelen añadir headers, encoding de body,
+/// hooks de auth y decoding de respuesta — eso pertenece a capas reales de networking,
+/// no a una demo de macro de conferencia.
 public protocol EndpointProtocol: Sendable {
     static var endpointID: String { get }
     var method: HTTPMethod { get }
@@ -23,7 +23,7 @@ public protocol EndpointProtocol: Sendable {
 }
 
 extension EndpointProtocol {
-    /// Builds a URLRequest against an in-memory base URL (never hits the network).
+    /// Construye un URLRequest contra una base URL en memoria (nunca toca la red).
     public func makeURLRequest(baseURL: URL = URL(string: "https://demo.local")!) -> URLRequest {
         var components = URLComponents(url: baseURL.appendingPathComponent(path.trimmingPrefix("/")), resolvingAgainstBaseURL: false)!
         if !queryItems.isEmpty {

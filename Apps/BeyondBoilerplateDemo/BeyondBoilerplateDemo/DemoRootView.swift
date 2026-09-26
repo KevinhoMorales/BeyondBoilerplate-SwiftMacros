@@ -28,9 +28,9 @@ struct DemoRootView: View {
                         .onAppear { session.onAppear(step: selection) }
                 } else {
                     ContentUnavailableView(
-                        "Pick a demo step",
+                        "Elige un paso de demo",
                         systemImage: "sparkles",
-                        description: Text("Start with Welcome, then walk @Endpoint → analytics → DI.")
+                        description: Text("Empieza con Bienvenida, luego recorre @Endpoint → analytics → DI.")
                     )
                 }
             }

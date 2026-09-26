@@ -2,13 +2,14 @@ import SwiftSyntax
 import SwiftSyntaxBuilder
 import SwiftSyntaxMacros
 
-/// Level 4b — AccessorMacro + PeerMacro composition (classic WWDC-style demo).
+/// Level 4b — Composición AccessorMacro + PeerMacro (demo clásica estilo WWDC).
 ///
-/// `@Clamped(min:max:)` keeps a numeric property within bounds.
-/// - PeerMacro emits private `_name` storage
-/// - AccessorMacro emits get/set that clamp on write
+/// `@Clamped(min:max:)` mantiene una propiedad numérica dentro de unos límites.
+/// - PeerMacro emite storage privado `_name`
+/// - AccessorMacro emite get/set que acotan al escribir
 ///
-/// Teaching goal: many useful property macros are *multi-role* — one attribute, several Macro protocols.
+/// Objetivo didáctico: muchos macros útiles de propiedades son *multi-role* —
+/// un atributo, varios protocolos Macro.
 public struct ClampedMacro: AccessorMacro, PeerMacro {
     public static func expansion(
         of node: AttributeSyntax,
@@ -65,7 +66,7 @@ public struct ClampedMacro: AccessorMacro, PeerMacro {
             return []
         }
 
-        // Re-validate bounds so peer expansion fails consistently when accessors also diagnose.
+        // Revalidar límites para que la expansión peer falle de forma consistente cuando accessors también diagnostican.
         guard node.integerLiteralArgument(labeled: "min") != nil,
               node.integerLiteralArgument(labeled: "max") != nil
         else {

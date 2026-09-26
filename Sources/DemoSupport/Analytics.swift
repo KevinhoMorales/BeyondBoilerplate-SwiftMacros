@@ -1,13 +1,13 @@
 import Foundation
 
-/// Protocol satisfied by `@AnalyticsEvent` expansions.
+/// Protocolo que satisfacen las expansiones de `@AnalyticsEvent`.
 public protocol AnalyticsEventProtocol: Sendable {
     static var eventName: String { get }
     var parameters: [String: String] { get }
     var payloadDescription: String { get }
 }
 
-/// Offline analytics sink — prints / records events instead of talking to a vendor SDK.
+/// Sink de analytics offline — imprime / registra eventos en lugar de hablar con un SDK de vendor.
 public final class InMemoryAnalytics: @unchecked Sendable {
     private(set) public var events: [(name: String, parameters: [String: String])] = []
 

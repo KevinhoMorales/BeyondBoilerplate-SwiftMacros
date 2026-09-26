@@ -3,12 +3,12 @@ import SwiftSyntaxMacros
 
 /// Level 2 — MemberMacro.
 ///
-/// `@AutoInit` synthesizes a public memberwise initializer for a struct's stored properties.
-/// Teaching goal: MemberMacro inspects the declaration's member block and *emits new members*
-/// into the same type — no peer type, no extension.
+/// `@AutoInit` sintetiza un inicializador memberwise público para las propiedades almacenadas de un struct.
+/// Objetivo didáctico: MemberMacro inspecciona el member block de la declaración y *emite nuevos members*
+/// dentro del mismo tipo — sin peer type, sin extension.
 ///
-/// Why MemberMacro (not PeerMacro)? The initializer belongs *inside* the annotated type.
-/// PeerMacro would emit a sibling declaration at the same scope, which is the wrong shape here.
+/// ¿Por qué MemberMacro (no PeerMacro)? El inicializador pertenece *dentro* del tipo anotado.
+/// PeerMacro emitiría una declaración hermana en el mismo scope, que es la forma incorrecta aquí.
 public struct AutoInitMacro: MemberMacro {
     public static func expansion(
         of node: AttributeSyntax,
@@ -29,7 +29,7 @@ public struct AutoInitMacro: MemberMacro {
 
         let access = accessPrefix(for: declaration.modifiers)
 
-        // Optionals default to `nil` so call sites stay ergonomic without inventing business defaults.
+        // Los optionals default a `nil` para que los call sites sigan ergonómicos sin inventar defaults de negocio.
         let parameterList = properties.map { property in
             if property.isOptional {
                 return "\(property.name): \(property.type) = nil"

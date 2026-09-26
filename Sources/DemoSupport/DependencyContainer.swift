@@ -1,11 +1,11 @@
 import Foundation
 
-/// Tiny educational DI container — deliberately *not* a framework.
+/// Contenedor DI educativo diminuto — deliberadamente *no* es un framework.
 ///
-/// Goals for the talk:
-/// 1. Show what `@AutoRegister` expands into.
-/// 2. Discuss magic vs explicit registration (test overrides, call-site clarity, debugging).
-/// 3. Avoid third-party DI so the package stays fully offline and dependency-light.
+/// Objetivos para la charla:
+/// 1. Mostrar en qué se expande `@AutoRegister`.
+/// 2. Debatir magia vs registro explícito (overrides de test, claridad del call-site, debugging).
+/// 3. Evitar DI de terceros para que el paquete siga totalmente offline y ligero de dependencias.
 public final class DependencyContainer: @unchecked Sendable {
     public typealias Factory = () -> Any
 
@@ -24,7 +24,7 @@ public final class DependencyContainer: @unchecked Sendable {
             return existing
         }
         guard let factory = factories[key], let value = factory() as? T else {
-            fatalError("DependencyContainer: no registration for \(type). Register manually or call Type.register(in:).")
+            fatalError("DependencyContainer: no hay registro para \(type). Registra a mano o llama Type.register(in:).")
         }
         singletons[key] = value
         return value
@@ -36,11 +36,11 @@ public final class DependencyContainer: @unchecked Sendable {
     }
 }
 
-/// Example service used by `@AutoRegister` demos.
+/// Servicio de ejemplo usado por demos de `@AutoRegister`.
 public struct GreetingService: Sendable {
     public init() {}
 
     public func greet(name: String) -> String {
-        "Hello, \(name) — resolved from DependencyContainer."
+        "Hola, \(name) — resuelto desde DependencyContainer."
     }
 }

@@ -3,12 +3,12 @@ import SwiftSyntaxMacros
 
 /// Level 3 — PeerMacro.
 ///
-/// `@MakeBuilder` emits a sibling `*Builder` type next to the annotated struct.
-/// Teaching goal: PeerMacro creates *related declarations at the same scope*,
-/// not members inside the type (MemberMacro) and not extensions (ExtensionMacro).
+/// `@MakeBuilder` emite un tipo hermano `*Builder` junto al struct anotado.
+/// Objetivo didáctico: PeerMacro crea *declaraciones relacionadas en el mismo scope*,
+/// no members dentro del tipo (MemberMacro) ni extensions (ExtensionMacro).
 ///
-/// Access level of the peer matches the annotated type so we never emit
-/// `public func build() -> InternalType` (a common macro footgun).
+/// El access level del peer coincide con el del tipo anotado para nunca emitir
+/// `public func build() -> InternalType` (un footgun habitual de macros).
 public struct MakeBuilderMacro: PeerMacro {
     public static func expansion(
         of node: AttributeSyntax,
@@ -55,7 +55,7 @@ public struct MakeBuilderMacro: PeerMacro {
     }
 }
 
-/// Returns `"public "` when the declaration is public; otherwise `""` (internal).
+/// Devuelve `"public "` cuando la declaración es public; de lo contrario `""` (internal).
 func accessPrefix(for modifiers: DeclModifierListSyntax) -> String {
     modifiers.contains(where: { $0.name.tokenKind == .keyword(.public) }) ? "public " : ""
 }
