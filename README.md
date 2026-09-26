@@ -23,15 +23,26 @@ This is **not** a toy `#stringify`-only sample. It is a progressive laboratory y
 
 > Macros require Swift 5.9+. This package targets **Swift 6 language mode** and current SwiftSyntax APIs (no deprecated expansion entry points).
 
-### Open in Xcode
+### Open in Xcode — two entry points
+
+**iOS SwiftUI demo (Simulator / device — preferred on stage):**
 
 ```bash
 git clone https://github.com/KevinhoMorales/BeyondBoilerplate-SwiftMacros.git
 cd BeyondBoilerplate-SwiftMacros
+open Apps/BeyondBoilerplateDemo/BeyondBoilerplateDemo.xcodeproj
+```
+
+Select scheme **BeyondBoilerplateDemo**, pick any iOS 17+ Simulator (e.g. iPhone 17), Run.  
+The app target links the **local Swift package at the repo root** (`BeyondBoilerplateMacrosClient` + `DemoSupport`) — same macros as the CLI.
+
+**Package / CLI laboratory:**
+
+```bash
 open Package.swift
 ```
 
-Single root `Package.swift` — one cohesive package, no multi-root confusion.
+Single root `Package.swift` — one cohesive package. The `.xcodeproj` is a thin iOS shell around it (not a second copy of the macros).
 
 ### Build, test, demo
 
@@ -41,9 +52,26 @@ swift test
 swift run DemoCLI          # WOW conference path (default)
 swift run DemoCLI levels   # progressive LEVEL 1–9 walkthrough
 swift run DemoCLI help
+
+# iOS app (from machine with Xcode + Simulator)
+xcodebuild \
+  -project Apps/BeyondBoilerplateDemo/BeyondBoilerplateDemo.xcodeproj \
+  -scheme BeyondBoilerplateDemo \
+  -destination 'platform=iOS Simulator,name=iPhone 17' \
+  build
 ```
 
 Fully **offline**. Networking uses an in-memory stub. No third-party DI frameworks.
+
+### Expand Macro (talk choreography)
+
+| Where | What to expand |
+|-------|----------------|
+| `Apps/.../DemoModels.swift` | `@Endpoint`, `@AnalyticsEvent`, `@AutoInit`, `@MakeBuilder`, `@AutoRegister` |
+| `Sources/DemoCLI/main.swift` | Same annotations on the CLI twin types |
+
+In Xcode: click the attribute → **Editor → Expand Macro** (or right-click → Expand Macro).  
+Tap through the iOS UI while the expansion sheet is open so the audience sees compile-time code and runtime behavior together.
 
 ---
 
@@ -54,6 +82,10 @@ BeyondBoilerplate-SwiftMacros/
 ├── Package.swift
 ├── README.md                          ← you are here (primary teaching)
 ├── Docs/                              ← optional deep-dives / talk notes
+├── Apps/BeyondBoilerplateDemo/        ← iOS SwiftUI .xcodeproj (local SPM)
+│   ├── BeyondBoilerplateDemo.xcodeproj
+│   ├── project.yml                    ← XcodeGen spec (optional regenerate)
+│   └── BeyondBoilerplateDemo/         ← SwiftUI sources + DemoModels.swift
 ├── Sources/
 │   ├── BeyondBoilerplateMacros/       ← macro *implementations* (SwiftSyntax)
 │   ├── BeyondBoilerplateMacrosClient/ ← public @freestanding / @attached decls
@@ -62,14 +94,16 @@ BeyondBoilerplate-SwiftMacros/
 └── Tests/BeyondBoilerplateMacrosTests/← MacroTesting expansions + diagnostics
 ```
 
-| Target | Role |
-|--------|------|
+| Target / app | Role |
+|--------------|------|
 | `BeyondBoilerplateMacros` | `.macro` plugin — never imported by app code |
 | `BeyondBoilerplateMacrosClient` | Declarations via `#externalMacro(module:type:)` |
 | `DemoSupport` | Tiny protocols + offline HTTP/analytics/DI |
-| `DemoCLI` | Progressive + WOW demo |
+| `DemoCLI` | Progressive + WOW demo (terminal) |
+| **BeyondBoilerplateDemo** | iOS SwiftUI app — same macros, tap-through UI |
 | `BeyondBoilerplateMacrosTests` | Expansion & diagnostic tests |
 
+**SPM vs app:** study / `swift test` / `DemoCLI` → open `Package.swift`. Live Expand Macro + Simulator → open the `.xcodeproj`. Do not gut either path; they share one package.
 ---
 
 ## 1. What is a Swift Macro?
@@ -416,7 +450,8 @@ swift run DemoCLI wow
 
 Prints: manual boilerplate → `@Endpoint` → generated-equivalent members → offline JSON response for Leeds / SwiftLeeds vibes.
 
-In Xcode: open `Sources/DemoCLI/main.swift`, right-click `@Endpoint` → **Expand Macro**.
+In Xcode: open `Apps/BeyondBoilerplateDemo/.../DemoModels.swift` (or `Sources/DemoCLI/main.swift`), right-click `@Endpoint` → **Expand Macro**.  
+On stage, prefer the iOS app so the audience sees the expansion *and* a restaurant list from `InMemoryHTTPClient`.
 
 ---
 
@@ -468,4 +503,4 @@ Feel free to fork for workshops; keep attribution in talk abstracts when you reu
 
 ---
 
-**Start here on stage:** `open Package.swift` → `swift run DemoCLI wow` → Expand Macro on `@Endpoint`.
+**Start here on stage:** `open Apps/BeyondBoilerplateDemo/BeyondBoilerplateDemo.xcodeproj` → Run on Simulator → Expand Macro on `@Endpoint` in `DemoModels.swift` → (optional) `swift run DemoCLI wow` for the terminal twin.
