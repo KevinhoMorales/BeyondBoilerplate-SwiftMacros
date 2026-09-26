@@ -2,11 +2,11 @@ import SwiftSyntax
 import SwiftSyntaxBuilder
 import SwiftSyntaxMacros
 
-/// Conference core — MemberMacro (+ ExtensionMacro) for analytics event payloads.
+/// Núcleo de conferencia — MemberMacro (+ ExtensionMacro) para payloads de analytics events.
 ///
-/// No third-party SDK: we generate a stable `eventName` and `parameters` dictionary
-/// so DemoCLI can print what would be sent. Teaching goal: macros shine when they
-/// convert a typed struct into a repetitive dictionary representation.
+/// Sin SDK de terceros: generamos un `eventName` estable y un diccionario `parameters`
+/// para que DemoCLI pueda imprimir lo que se enviaría. Objetivo didáctico: los macros brillan
+/// cuando convierten un struct tipado en una representación repetitiva de diccionario.
 public struct AnalyticsEventMacro: MemberMacro, ExtensionMacro {
     public static func expansion(
         of node: AttributeSyntax,
@@ -26,7 +26,7 @@ public struct AnalyticsEventMacro: MemberMacro, ExtensionMacro {
         }
 
         let typeName = declaration.typeNameToken?.text ?? "Event"
-        // snake_case-ish event names from the type: RestaurantOpened → restaurant_opened (simple heuristic).
+        // Nombres de evento tipo snake_case desde el tipo: RestaurantOpened → restaurant_opened (heurística simple).
         let eventName = snakeCase(from: typeName)
 
         let parameterEntries = properties.map { property in
@@ -75,7 +75,7 @@ public struct AnalyticsEventMacro: MemberMacro, ExtensionMacro {
         return [extensionDecl]
     }
 
-    /// Minimal CamelCase → snake_case for demo event names (not a full Unicode word breaker).
+    /// CamelCase → snake_case mínimo para nombres de evento de demo (no es un word breaker Unicode completo).
     private static func snakeCase(from typeName: String) -> String {
         var result = ""
         for (index, character) in typeName.enumerated() {

@@ -1,30 +1,30 @@
 import SwiftSyntax
 import SwiftSyntaxBuilder
 
-/// Shared helpers for walking stored properties and building parameter lists.
+/// Helpers compartidos para recorrer propiedades almacenadas y construir listas de parámetros.
 ///
-/// Why a helper module? Macro implementations that touch property lists
-/// (AutoInit, MakeBuilder, Endpoint, Analytics, Equatable) share the same
-/// SwiftSyntax questions: "is this stored?", "what is its type?", "is it optional?".
+/// ¿Por qué un módulo helper? Las implementaciones de macros que tocan listas de propiedades
+/// (AutoInit, MakeBuilder, Endpoint, Analytics, Equatable) comparten las mismas
+/// preguntas de SwiftSyntax: "¿está stored?", "¿cuál es su tipo?", "¿es optional?".
 struct StoredProperty {
     let name: TokenSyntax
     let type: TypeSyntax
     let isOptional: Bool
     let binding: PatternBindingSyntax
 
-    /// Collects stored `let`/`var` bindings, skipping computed properties and static members.
+    /// Recoge bindings `let`/`var` stored, omitiendo propiedades computed y members static.
     static func collect(from declaration: some DeclGroupSyntax) -> [StoredProperty] {
         var results: [StoredProperty] = []
 
         for member in declaration.memberBlock.members {
             guard let varDecl = member.decl.as(VariableDeclSyntax.self) else { continue }
-            // Skip static / class members — memberwise init and builders care about instance state.
+            // Omite members static / class — el init memberwise y los builders cuidan el estado de instancia.
             if varDecl.modifiers.contains(where: {
                 $0.name.tokenKind == .keyword(.static) || $0.name.tokenKind == .keyword(.class)
             }) {
                 continue
             }
-            // Skip properties that already have accessors (computed / observed-only).
+            // Omite propiedades que ya tienen accessors (computed / solo observadas).
             for binding in varDecl.bindings {
                 if binding.accessorBlock != nil { continue }
                 guard let pattern = binding.pattern.as(IdentifierPatternSyntax.self) else { continue }
@@ -53,7 +53,7 @@ extension TypeSyntax {
         return false
     }
 
-    /// Best-effort default expression for builder peer properties.
+    /// Expresión default best-effort para propiedades del peer Builder.
     var builderDefaultExpression: ExprSyntax {
         if isOptionalType {
             return ExprSyntax(NilLiteralExprSyntax())
@@ -73,13 +73,13 @@ extension TypeSyntax {
                 break
             }
         }
-        // Fallback keeps the Builder compiling for custom types that expose `.init()`.
+        // Fallback mantiene el Builder compilando para tipos custom que exponen `.init()`.
         return ExprSyntax(MemberAccessExprSyntax(name: .identifier("init")))
     }
 }
 
 extension AttributeSyntax {
-    /// Reads a labeled argument expression by label text (`method`, `path`, `min`, …).
+    /// Lee una expresión de argumento etiquetado por texto de label (`method`, `path`, `min`, …).
     func argument(labeled label: String) -> ExprSyntax? {
         guard case let .argumentList(arguments) = arguments else { return nil }
         return arguments.first(where: { $0.label?.text == label })?.expression
@@ -101,7 +101,7 @@ extension AttributeSyntax {
         if let int = expr.as(IntegerLiteralExprSyntax.self) {
             return Int(int.literal.text)
         }
-        // Support unary minus: -1
+        // Soporte para menos unario: -1
         if let prefix = expr.as(PrefixOperatorExprSyntax.self),
            prefix.operator.text == "-",
            let int = prefix.expression.as(IntegerLiteralExprSyntax.self),

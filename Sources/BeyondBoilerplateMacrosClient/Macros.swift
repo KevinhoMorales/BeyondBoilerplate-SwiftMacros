@@ -3,33 +3,33 @@ import Foundation
 
 // MARK: - Level 1: Freestanding expression
 
-/// Classic teaching macro: `#stringify(expr)` → `(expr, "expr")`.
+/// Macro clásico de enseñanza: `#stringify(expr)` → `(expr, "expr")`.
 @freestanding(expression)
 public macro stringify<T>(_ value: T) -> (T, String) =
     #externalMacro(module: "BeyondBoilerplateMacros", type: "StringifyMacro")
 
 // MARK: - Level 2: MemberMacro
 
-/// Synthesizes a public memberwise `init` for stored properties.
+/// Sintetiza un `init` memberwise público para las propiedades almacenadas.
 @attached(member, names: named(init))
 public macro AutoInit() =
     #externalMacro(module: "BeyondBoilerplateMacros", type: "AutoInitMacro")
 
 // MARK: - Level 3: PeerMacro
 
-/// Emits a sibling `TypeBuilder` peer with fluent-ish defaults.
+/// Emite un peer hermano `TypeBuilder` con defaults tipo fluent.
 @attached(peer, names: suffixed(Builder))
 public macro MakeBuilder() =
     #externalMacro(module: "BeyondBoilerplateMacros", type: "MakeBuilderMacro")
 
 // MARK: - Level 4: AccessorMacro
 
-/// Adds a `didSet` logger to a stored property.
+/// Añade un logger `didSet` a una propiedad almacenada.
 @attached(accessor, names: named(didSet))
 public macro Logged() =
     #externalMacro(module: "BeyondBoilerplateMacros", type: "LoggedMacro")
 
-/// Clamps integer writes into `[min, max]` using Peer storage + Accessor get/set.
+/// Acota escrituras de enteros a `[min, max]` usando Peer storage + Accessor get/set.
 @attached(accessor)
 @attached(peer, names: prefixed(_))
 public macro Clamped(min: Int, max: Int) =
@@ -37,8 +37,8 @@ public macro Clamped(min: Int, max: Int) =
 
 // MARK: - Level 5: Extension / Conformance
 
-/// Adds `Equatable` by comparing stored properties.
-/// See README limitations before using this pattern in production.
+/// Añade `Equatable` comparando propiedades almacenadas.
+/// Consulta las limitaciones del README antes de usar este patrón en producción.
 @attached(extension, conformances: Equatable, names: named(==))
 @attached(member, names: named(==))
 public macro AutoEquatable() =
@@ -46,7 +46,7 @@ public macro AutoEquatable() =
 
 // MARK: - Production demos
 
-/// Networking endpoint boilerplate → `EndpointProtocol` witnesses for `InMemoryHTTPClient`.
+/// Boilerplate de networking endpoint → witnesses de `EndpointProtocol` para `InMemoryHTTPClient`.
 @attached(
     member,
     names: named(endpointID), named(method), named(path), named(queryItems), named(requestDescription)
@@ -55,7 +55,7 @@ public macro AutoEquatable() =
 public macro Endpoint(method: HTTPMethod, path: String) =
     #externalMacro(module: "BeyondBoilerplateMacros", type: "EndpointMacro")
 
-/// Analytics event boilerplate → name + parameter dictionary (no vendor SDK).
+/// Boilerplate de analytics event → nombre + diccionario de parameters (sin SDK de vendor).
 @attached(
     member,
     names: named(eventName), named(parameters), named(payloadDescription)
@@ -64,7 +64,7 @@ public macro Endpoint(method: HTTPMethod, path: String) =
 public macro AnalyticsEvent() =
     #externalMacro(module: "BeyondBoilerplateMacros", type: "AnalyticsEventMacro")
 
-/// Educational DI: emits `static func register(in: DependencyContainer)`.
+/// DI educativa: emite `static func register(in: DependencyContainer)`.
 @attached(member, names: named(register))
 public macro AutoRegister() =
     #externalMacro(module: "BeyondBoilerplateMacros", type: "AutoRegisterMacro")

@@ -43,7 +43,7 @@ struct BeyondBoilerplateMacrosTests {
             """
             #stringify()
             ┬───────────
-            ╰─ 🛑 #stringify requires exactly one expression argument, e.g. #stringify(a + b).
+            ╰─ 🛑 #stringify requiere exactamente un argumento de expresión, p. ej. #stringify(a + b).
             """
         }
     }
@@ -91,7 +91,7 @@ struct BeyondBoilerplateMacrosTests {
             """
             @AutoInit
             ┬────────
-            ╰─ 🛑 @AutoInit can only be attached to a struct. Enums and classes already have richer initialization rules—write those inits by hand.
+            ╰─ 🛑 @AutoInit solo se puede adjuntar a un struct. Los enums y las classes ya tienen reglas de inicialización más ricas—escribe esos inits a mano.
             enum Role {
                 case admin
             }
@@ -111,7 +111,7 @@ struct BeyondBoilerplateMacrosTests {
             """
             @AutoInit
             ┬────────
-            ╰─ 🛑 @AutoInit found no stored properties. Add `let`/`var` stored members, or remove the attribute.
+            ╰─ 🛑 @AutoInit no encontró propiedades almacenadas. Añade members almacenados `let`/`var`, o quita el atributo.
             struct Empty {
             }
             """
@@ -165,7 +165,7 @@ struct BeyondBoilerplateMacrosTests {
             """
             @MakeBuilder
             ┬───────────
-            ╰─ 🛑 @MakeBuilder can only be attached to a struct so the generated peer Builder can call a memberwise initializer.
+            ╰─ 🛑 @MakeBuilder solo se puede adjuntar a un struct para que el peer Builder generado pueda llamar a un inicializador memberwise.
             enum Role {
                 case admin
             }
@@ -238,7 +238,7 @@ struct BeyondBoilerplateMacrosTests {
             struct Meter {
                 @Clamped
                 ┬───────
-                ╰─ 🛑 @Clamped requires both min: and max: integer arguments, e.g. @Clamped(min: 0, max: 10).
+                ╰─ 🛑 @Clamped requiere ambos argumentos enteros min: y max:, p. ej. @Clamped(min: 0, max: 10).
                 var percentage: Int = 0
             }
             """
@@ -332,7 +332,7 @@ struct BeyondBoilerplateMacrosTests {
             """
             @Endpoint(method: .get, path: "")
             ┬────────────────────────────────
-            ╰─ 🛑 @Endpoint path must be a non-empty string literal starting with '/', e.g. "/restaurants".
+            ╰─ 🛑 @Endpoint path debe ser un string literal no vacío que empiece con '/', p. ej. "/restaurants".
             struct Bad {
                 let city: String
             }
@@ -353,7 +353,7 @@ struct BeyondBoilerplateMacrosTests {
             """
             @Endpoint(method: .get, path: "/x")
             ┬──────────────────────────────────
-            ╰─ 🛑 @Endpoint can only be attached to a struct that models one HTTP request.
+            ╰─ 🛑 @Endpoint solo se puede adjuntar a un struct que modele una petición HTTP.
             enum Bad {
                 case a
             }
@@ -414,7 +414,7 @@ struct BeyondBoilerplateMacrosTests {
             """
             @AnalyticsEvent
             ┬──────────────
-            ╰─ 🛑 @AnalyticsEvent found no stored properties to encode as event parameters.
+            ╰─ 🛑 @AnalyticsEvent no encontró propiedades almacenadas para codificar como parameters del evento.
             struct EmptyEvent {
             }
             """
@@ -462,7 +462,7 @@ struct BeyondBoilerplateMacrosTests {
             """
             @AutoRegister
             ┬────────────
-            ╰─ 🛑 @AutoRegister can only be attached to a struct or class type.
+            ╰─ 🛑 @AutoRegister solo se puede adjuntar a un tipo struct o class.
             enum Service {
                 case live
             }

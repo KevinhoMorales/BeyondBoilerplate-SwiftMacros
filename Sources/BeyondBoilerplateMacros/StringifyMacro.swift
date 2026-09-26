@@ -1,11 +1,12 @@
 import SwiftSyntax
 import SwiftSyntaxMacros
 
-/// Level 1 — Freestanding expression macro.
+/// Level 1 — Macro freestanding de expresión.
 ///
-/// `#stringify(expr)` expands to a tuple `(expr, "expr")`.
-/// Teaching goal: show the *input AST expression* becoming both a runtime value
-/// and a compile-time string captured from source text — the classic "macros see source" demo.
+/// `#stringify(expr)` se expande a una tupla `(expr, "expr")`.
+/// Objetivo didáctico: mostrar la *expresión AST de entrada* convirtiéndose en un valor
+/// en runtime y en un string capturado del texto fuente en compile-time — la demo clásica
+/// de "los macros ven el código fuente".
 public struct StringifyMacro: ExpressionMacro {
     public static func expansion(
         of node: some FreestandingMacroExpansionSyntax,
@@ -16,8 +17,8 @@ public struct StringifyMacro: ExpressionMacro {
             return "()"
         }
 
-        // `argument.description` preserves source text (operators, trivia-ish spacing).
-        // That is the educational punchline: the compiler already parsed this; we reuse the text.
+        // `argument.description` preserva el texto fuente (operadores, spacing tipo trivia).
+        // Esa es la punchline educativa: el compilador ya parseó esto; reutilizamos el texto.
         return "(\(argument), \(literal: argument.description))"
     }
 }

@@ -1,10 +1,10 @@
 import SwiftCompilerPlugin
 import SwiftSyntaxMacros
 
-/// Compiler plugin entry point — lists every macro this package provides.
+/// Punto de entrada del compiler plugin — lista cada macro que provee este paquete.
 ///
-/// SPM `.macro` targets must expose an `@main` CompilerPlugin. Xcode/SPM host this
-/// process separately during compilation; client code never imports this module directly.
+/// Los targets SPM `.macro` deben exponer un CompilerPlugin `@main`. Xcode/SPM hospedan este
+/// proceso por separado durante la compilación; el código cliente nunca importa este módulo directamente.
 @main
 struct BeyondBoilerplatePlugin: CompilerPlugin {
     let providingMacros: [Macro.Type] = [

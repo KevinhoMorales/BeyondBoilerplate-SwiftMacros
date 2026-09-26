@@ -2,7 +2,7 @@ import SwiftSyntax
 import SwiftSyntaxBuilder
 import SwiftSyntaxMacros
 
-/// Conference core — MemberMacro + ExtensionMacro for a tiny networking layer.
+/// Núcleo de conferencia — MemberMacro + ExtensionMacro para una capa mínima de networking.
 ///
 /// ```swift
 /// @Endpoint(method: .get, path: "/restaurants")
@@ -11,8 +11,8 @@ import SwiftSyntaxMacros
 /// }
 /// ```
 ///
-/// Expansion supplies EndpointProtocol witnesses used by the offline `InMemoryHTTPClient`.
-/// Keep the generated surface small enough to Expand Macro live and still finish the sentence.
+/// La expansión aporta witnesses de EndpointProtocol usados por el `InMemoryHTTPClient` offline.
+/// Mantén la superficie generada lo bastante pequeña para Expand Macro en vivo y aún terminar la frase.
 public struct EndpointMacro: MemberMacro, ExtensionMacro {
     public static func expansion(
         of node: AttributeSyntax,
@@ -45,13 +45,13 @@ public struct EndpointMacro: MemberMacro, ExtensionMacro {
 
         let typeName = declaration.typeNameToken?.text ?? "Endpoint"
         let queryPairs = properties.map { property in
-            // String(describing:) keeps the demo free of Encodable constraints while remaining honest.
+            // String(describing:) mantiene la demo libre de constraints Encodable y sigue siendo honesta.
             """
             URLQueryItem(name: "\(property.name)", value: String(describing: \(property.name)))
             """
         }.joined(separator: ",\n")
 
-        // Members stay on the type so call sites read as `GetRestaurants(city:).method`.
+        // Los members viven en el tipo para que los call sites se lean como `GetRestaurants(city:).method`.
         let members: [DeclSyntax] = [
             """
             public static let endpointID: String = "\(raw: typeName)"
@@ -86,7 +86,7 @@ public struct EndpointMacro: MemberMacro, ExtensionMacro {
         conformingTo protocols: [TypeSyntax],
         in context: some MacroExpansionContext
     ) throws -> [ExtensionDeclSyntax] {
-        // Validation already diagnosed in MemberMacro; only emit conformance for valid shapes.
+        // La validación ya diagnosticó en MemberMacro; solo emite conformance para formas válidas.
         guard declaration.isStruct,
               node.argument(labeled: "method") != nil,
               let path = node.stringLiteralArgument(labeled: "path"),

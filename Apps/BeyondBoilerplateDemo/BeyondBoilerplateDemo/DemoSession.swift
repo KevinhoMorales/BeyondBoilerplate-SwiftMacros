@@ -3,7 +3,7 @@ import DemoSupport
 import Foundation
 import Observation
 
-/// Offline demo engine — same stubs as DemoCLI, wired for SwiftUI.
+/// Motor de demo offline — mismos stubs que DemoCLI, cableados para SwiftUI.
 @Observable
 @MainActor
 final class DemoSession {
@@ -19,29 +19,29 @@ final class DemoSession {
 
         var title: String {
             switch self {
-            case .welcome: "Welcome"
+            case .welcome: "Bienvenida"
             case .restaurants: "1 · @Endpoint"
             case .analytics: "2 · @AnalyticsEvent"
             case .autoInit: "3 · @AutoInit"
             case .dependencyInjection: "4 · @AutoRegister"
-            case .takeaway: "When not to use macros"
+            case .takeaway: "Cuándo no usar macros"
             }
         }
 
         var subtitle: String {
             switch self {
             case .welcome:
-                "Progressive iOS lab — expand macros in Xcode, tap through offline demos."
+                "Lab iOS progresivo — expande macros en Xcode, recorre demos offline."
             case .restaurants:
-                "Fetch restaurants via generated EndpointProtocol + InMemoryHTTPClient."
+                "Obtén restaurantes vía EndpointProtocol generado + InMemoryHTTPClient."
             case .analytics:
-                "Fire typed events; no vendor SDK — just an in-memory sink."
+                "Dispara eventos tipados; sin SDK de vendor — solo un sink en memoria."
             case .autoInit:
-                "Memberwise init (and peers) synthesized at compile time."
+                "Init memberwise (y peers) sintetizados en compile-time."
             case .dependencyInjection:
-                "Educational DI registration — debate magic vs explicit roots."
+                "Registro DI educativo — debate magia vs roots explícitos."
             case .takeaway:
-                "Macros delete structural boilerplate — not business rules."
+                "Los macros eliminan boilerplate estructural — no reglas de negocio."
             }
         }
     }
@@ -54,7 +54,7 @@ final class DemoSession {
     private(set) var autoInitSample: String = ""
     private(set) var builderSample: String = ""
     private(set) var clampNote: String = ""
-    private(set) var statusMessage: String = "Ready — fully offline."
+    private(set) var statusMessage: String = "Listo — totalmente offline."
 
     private let http = InMemoryHTTPClient()
     private let analytics = InMemoryAnalytics()
@@ -78,9 +78,9 @@ final class DemoSession {
             let response = try http.send(endpoint)
             lastResponsePretty = String(data: response.body, encoding: .utf8) ?? ""
             restaurants = decodeRestaurants(from: response.body, fallbackCity: city)
-            statusMessage = "Loaded \(restaurants.count) restaurants · \(city)"
+            statusMessage = "Cargados \(restaurants.count) restaurantes · \(city)"
         } catch {
-            statusMessage = "Request failed: \(error.localizedDescription)"
+            statusMessage = "Petición fallida: \(error.localizedDescription)"
             restaurants = []
         }
     }
@@ -89,14 +89,14 @@ final class DemoSession {
         let event = RestaurantOpened(restaurantID: restaurant.id, source: "list")
         analytics.track(event)
         appendAnalytics(event)
-        statusMessage = "Tracked \(type(of: event).eventName)"
+        statusMessage = "Registrado \(type(of: event).eventName)"
     }
 
     func fireAnalyticsDemo() {
         let event = RestaurantOpened(restaurantID: "dishoom", source: "stage_tap")
         analytics.track(event)
         appendAnalytics(event)
-        statusMessage = "Events recorded: \(analytics.events.count)"
+        statusMessage = "Eventos registrados: \(analytics.events.count)"
     }
 
     func runAutoInitDemo() {
@@ -119,19 +119,19 @@ final class DemoSession {
         var volume = VolumeControl()
         volume.percentage = 99
         clampNote = "Clamped 99 → \(volume.percentage) (max 10)"
-        statusMessage = "@AutoInit / @MakeBuilder / @Clamped exercised"
+        statusMessage = "@AutoInit / @MakeBuilder / @Clamped ejercitados"
     }
 
     func resolveMenuRepository() {
         let repo = container.resolve(MenuRepository.self)
         featuredDishes = repo.featured()
-        statusMessage = "Resolved MenuRepository · \(featuredDishes.count) dishes"
+        statusMessage = "Resuelto MenuRepository · \(featuredDishes.count) platos"
     }
 
     func clearAnalytics() {
         analytics.reset()
         analyticsLog.removeAll()
-        statusMessage = "Analytics cleared"
+        statusMessage = "Analytics limpiado"
     }
 
     // MARK: - Private

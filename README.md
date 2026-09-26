@@ -1,13 +1,13 @@
 # Beyond Boilerplate: Building Production-Ready Swift Macros
 
-Educational Swift package and live-demo laboratory for Kevin Morales’s talk:
+Paquete educativo de Swift y laboratorio de demo en vivo para la charla de Kevin Morales:
 
 > **Beyond Boilerplate: Building Production-Ready Swift Macros**
 
-Designed for DevFest (Spanish delivery later) and reuse at London / SwiftLeeds.  
-**All code, comments, README text, and CLI output in this repository are in English.**
+**Español para DevFest ahora; inglés para SwiftLeeds más adelante.**  
+Este repositorio está en **español** para humanos (README, comentarios educativos, salida de CLI y textos de UI de iOS). La **sintaxis de Swift**, identificadores, nombres de macros, rutas, comandos de CLI y URLs permanecen en **inglés**.
 
-This is **not** a toy `#stringify`-only sample. It is a progressive laboratory you can open in Xcode, study line-by-line, run offline on stage, and use to teach *when* macros belong in production — and when they do not.
+Esto **no** es un sample de juguete solo con `#stringify`. Es un laboratorio progresivo que puedes abrir en Xcode, estudiar línea a línea, ejecutar offline en el escenario y usar para enseñar *cuándo* los macros pertenecen a producción — y cuándo no.
 
 ---
 
@@ -21,11 +21,11 @@ This is **not** a toy `#stringify`-only sample. It is a progressive laboratory y
 | **MacroTesting** | **0.7.x** (Point-Free) |
 | **Platforms** | macOS 14+, iOS 17+ (library) |
 
-> Macros require Swift 5.9+. This package targets **Swift 6 language mode** and current SwiftSyntax APIs (no deprecated expansion entry points).
+> Los macros requieren Swift 5.9+. Este paquete apunta al **modo de lenguaje Swift 6** y a las APIs actuales de SwiftSyntax (sin puntos de entrada de expansión deprecados).
 
-### Open in Xcode — two entry points
+### Abrir en Xcode — dos puntos de entrada
 
-**iOS SwiftUI demo (Simulator / device — preferred on stage):**
+**Demo iOS SwiftUI (Simulator / device — preferido en el escenario):**
 
 ```bash
 git clone https://github.com/KevinhoMorales/BeyondBoilerplate-SwiftMacros.git
@@ -33,16 +33,16 @@ cd BeyondBoilerplate-SwiftMacros
 open Apps/BeyondBoilerplateDemo/BeyondBoilerplateDemo.xcodeproj
 ```
 
-Select scheme **BeyondBoilerplateDemo**, pick any iOS 17+ Simulator (e.g. iPhone 17), Run.  
-The app target links the **local Swift package at the repo root** (`BeyondBoilerplateMacrosClient` + `DemoSupport`) — same macros as the CLI.
+Selecciona el scheme **BeyondBoilerplateDemo**, elige cualquier Simulator iOS 17+ (p. ej. iPhone 17), Run.  
+El target de la app enlaza el **paquete Swift local en la raíz del repo** (`BeyondBoilerplateMacrosClient` + `DemoSupport`) — los mismos macros que el CLI.
 
-**Package / CLI laboratory:**
+**Laboratorio Package / CLI:**
 
 ```bash
 open Package.swift
 ```
 
-Single root `Package.swift` — one cohesive package. The `.xcodeproj` is a thin iOS shell around it (not a second copy of the macros).
+Un solo `Package.swift` en la raíz — un paquete cohesivo. El `.xcodeproj` es una capa iOS delgada alrededor (no una segunda copia de los macros).
 
 ### Build, test, demo
 
@@ -61,17 +61,17 @@ xcodebuild \
   build
 ```
 
-Fully **offline**. Networking uses an in-memory stub. No third-party DI frameworks.
+Totalmente **offline**. La red usa un stub en memoria. Sin frameworks de DI de terceros.
 
-### Expand Macro (talk choreography)
+### Expand Macro (coreografía de la charla)
 
 | Where | What to expand |
 |-------|----------------|
 | `Apps/.../DemoModels.swift` | `@Endpoint`, `@AnalyticsEvent`, `@AutoInit`, `@MakeBuilder`, `@AutoRegister` |
-| `Sources/DemoCLI/main.swift` | Same annotations on the CLI twin types |
+| `Sources/DemoCLI/main.swift` | Las mismas anotaciones en los tipos gemelos del CLI |
 
-In Xcode: click the attribute → **Editor → Expand Macro** (or right-click → Expand Macro).  
-Tap through the iOS UI while the expansion sheet is open so the audience sees compile-time code and runtime behavior together.
+En Xcode: haz clic en el atributo → **Editor → Expand Macro** (o clic derecho → Expand Macro).  
+Navega la UI de iOS mientras la hoja de expansión está abierta para que la audiencia vea el código en compile-time y el comportamiento en runtime juntos.
 
 ---
 
@@ -96,35 +96,35 @@ BeyondBoilerplate-SwiftMacros/
 
 | Target / app | Role |
 |--------------|------|
-| `BeyondBoilerplateMacros` | `.macro` plugin — never imported by app code |
-| `BeyondBoilerplateMacrosClient` | Declarations via `#externalMacro(module:type:)` |
-| `DemoSupport` | Tiny protocols + offline HTTP/analytics/DI |
-| `DemoCLI` | Progressive + WOW demo (terminal) |
-| **BeyondBoilerplateDemo** | iOS SwiftUI app — same macros, tap-through UI |
-| `BeyondBoilerplateMacrosTests` | Expansion & diagnostic tests |
+| `BeyondBoilerplateMacros` | Plugin `.macro` — nunca lo importa el código de la app |
+| `BeyondBoilerplateMacrosClient` | Declaraciones vía `#externalMacro(module:type:)` |
+| `DemoSupport` | Protocolos pequeños + HTTP/analytics/DI offline |
+| `DemoCLI` | Demo progresiva + WOW (terminal) |
+| **BeyondBoilerplateDemo** | App iOS SwiftUI — mismos macros, UI por taps |
+| `BeyondBoilerplateMacrosTests` | Tests de expansión y diagnósticos |
 
-**SPM vs app:** study / `swift test` / `DemoCLI` → open `Package.swift`. Live Expand Macro + Simulator → open the `.xcodeproj`. Do not gut either path; they share one package.
+**SPM vs app:** estudiar / `swift test` / `DemoCLI` → abre `Package.swift`. Expand Macro en vivo + Simulator → abre el `.xcodeproj`. No descartes ninguno de los dos caminos; comparten un solo paquete.
 ---
 
-## 1. What is a Swift Macro?
+## 1. ¿Qué es un Swift Macro?
 
-### Simple answer
+### Respuesta simple
 
-A Swift macro is a **compile-time program** that reads Swift source (as a syntax tree) and **writes more Swift source** back into your module before type-checking finishes. You author a small attribute or `#name(...)` call; the compiler expands it into real code that then compiles like anything else you typed by hand.
+Un macro de Swift es un **programa en compile-time** que lee código fuente Swift (como un árbol de sintaxis) y **escribe más código fuente Swift** de vuelta en tu módulo antes de que termine el type-checking. Tú escribes un atributo pequeño o una llamada `#name(...)`; el compilador lo expande a código real que luego compila como cualquier cosa que hubieras escrito a mano.
 
-### Technical answer
+### Respuesta técnica
 
-Macros are a form of **metaprogramming**:
+Los macros son una forma de **metaprogramación**:
 
 | Concept | Meaning |
 |---------|---------|
-| **Expansion** | The macro plugin runs in a separate process and returns new syntax nodes |
-| **Generated code** | Ordinary Swift that must type-check; there is no hidden runtime interpreter |
-| **Compile-time vs runtime** | Decisions and code emission happen at compile time; the resulting binary only contains the expanded code |
-| **vs reflection** | Reflection inspects types at *runtime* and cannot invent new methods/conformances in your module |
-| **vs traditional codegen** | Sourcery / Gyb / scripts run *outside* the compiler; macros participate in the build graph, diagnostics, and incremental compilation |
+| **Expansion** | El plugin del macro corre en un proceso separado y devuelve nuevos nodos de sintaxis |
+| **Generated code** | Swift ordinario que debe pasar el type-check; no hay un intérprete oculto en runtime |
+| **Compile-time vs runtime** | Las decisiones y la emisión de código ocurren en compile-time; el binario resultante solo contiene el código expandido |
+| **vs reflection** | La reflexión inspecciona tipos en *runtime* y no puede inventar métodos/conformances nuevos en tu módulo |
+| **vs traditional codegen** | Sourcery / Gyb / scripts corren *fuera* del compilador; los macros participan en el grafo de build, diagnósticos y compilación incremental |
 
-### ASCII pipeline
+### Pipeline ASCII
 
 ```
   Source.swift
@@ -152,25 +152,25 @@ Macros are a form of **metaprogramming**:
   └──────────┘
 ```
 
-**Key teaching line:** macros do not “run your business logic early.” They **author structural Swift** so humans stop copy-pasting it.
+**Línea clave de enseñanza:** los macros no “ejecutan tu lógica de negocio antes.” **Autoran Swift estructural** para que los humanos dejen de copiar y pegar.
 
 ---
 
-## 2. SwiftSyntax (deep but readable)
+## 2. SwiftSyntax (profundo pero legible)
 
-SwiftSyntax is a **source-accurate tree** of Swift code: every declaration, expression, attribute, and piece of trivia (spaces, comments, newlines) can be represented.
+SwiftSyntax es un **árbol fiel al código fuente** de Swift: cada declaración, expresión, atributo y pieza de trivia (espacios, comentarios, saltos de línea) se puede representar.
 
 | Term | Intuition |
 |------|-----------|
-| **Tree / node** | Nested structure: `SourceFile` → `StructDecl` → `MemberBlock` → … |
-| **Token** | Leaf: identifiers, keywords, punctuation (`struct`, `User`, `{`) |
-| **Decl** | Declaration nodes (`StructDeclSyntax`, `FunctionDeclSyntax`, …) |
-| **Expr** | Expression nodes (`InfixExprSyntax`, `StringLiteralExprSyntax`, …) |
-| **Attribute** | `@Endpoint(method:path:)` as `AttributeSyntax` + argument list |
-| **Trivia** | Leading/trailing whitespace & comments attached to tokens |
-| **Source location** | Where diagnostics should underline |
+| **Tree / node** | Estructura anidada: `SourceFile` → `StructDecl` → `MemberBlock` → … |
+| **Token** | Hoja: identificadores, keywords, puntuación (`struct`, `User`, `{`) |
+| **Decl** | Nodos de declaración (`StructDeclSyntax`, `FunctionDeclSyntax`, …) |
+| **Expr** | Nodos de expresión (`InfixExprSyntax`, `StringLiteralExprSyntax`, …) |
+| **Attribute** | `@Endpoint(method:path:)` como `AttributeSyntax` + lista de argumentos |
+| **Trivia** | Espacios y comentarios leading/trailing unidos a los tokens |
+| **Source location** | Dónde los diagnósticos deben subrayar |
 
-### Conceptual tree for `struct User { let name: String }`
+### Árbol conceptual para `struct User { let name: String }`
 
 ```
 StructDeclSyntax
@@ -184,34 +184,34 @@ StructDeclSyntax
             └── TypeAnnotation → IdentifierType "String"
 ```
 
-A **MemberMacro** walks `declaration.memberBlock.members`, filters stored properties, and emits a new `init` `DeclSyntax`.  
-A **PeerMacro** returns declarations that appear *beside* the annotated type.  
-An **ExtensionMacro** returns `extension Type: Protocol { … }`.
+Un **MemberMacro** recorre `declaration.memberBlock.members`, filtra propiedades almacenadas y emite un nuevo `init` `DeclSyntax`.  
+Un **PeerMacro** devuelve declaraciones que aparecen *junto a* el tipo anotado.  
+Un **ExtensionMacro** devuelve `extension Type: Protocol { … }`.
 
-This package uses **SwiftSyntaxBuilder** string interpolation (`DeclSyntax`, `ExtensionDeclSyntax`) where readability for the stage wins, and typed builders/helpers in `SyntaxHelpers.swift` for shared property collection.
+Este paquete usa interpolación de strings de **SwiftSyntaxBuilder** (`DeclSyntax`, `ExtensionDeclSyntax`) donde gana la legibilidad en el escenario, y builders/helpers tipados en `SyntaxHelpers.swift` para la recolección compartida de propiedades.
 
 ---
 
-## 3. Types of macros (with in-repo examples)
+## 3. Tipos de macros (con ejemplos en el repo)
 
 | Kind | Role | Example in this repo |
 |------|------|----------------------|
-| **Freestanding / Expression** | `#name(args)` → expression | [`StringifyMacro.swift`](Sources/BeyondBoilerplateMacros/StringifyMacro.swift) |
-| **MemberMacro** | Add members inside a type | [`AutoInitMacro.swift`](Sources/BeyondBoilerplateMacros/AutoInitMacro.swift) |
-| **PeerMacro** | Emit sibling declarations | [`MakeBuilderMacro.swift`](Sources/BeyondBoilerplateMacros/MakeBuilderMacro.swift) |
-| **AccessorMacro** | Attach get/set/didSet/… | [`LoggedMacro.swift`](Sources/BeyondBoilerplateMacros/LoggedMacro.swift), [`ClampedMacro.swift`](Sources/BeyondBoilerplateMacros/ClampedMacro.swift) |
-| **ExtensionMacro** | Add extensions / conformances | [`AutoEquatableMacro.swift`](Sources/BeyondBoilerplateMacros/AutoEquatableMacro.swift) |
-| **Multi-role** | One attribute, several protocols | `@Clamped`, `@Endpoint`, `@AnalyticsEvent` |
+| **Freestanding / Expression** | `#name(args)` → expresión | [`StringifyMacro.swift`](Sources/BeyondBoilerplateMacros/StringifyMacro.swift) |
+| **MemberMacro** | Añadir members dentro de un tipo | [`AutoInitMacro.swift`](Sources/BeyondBoilerplateMacros/AutoInitMacro.swift) |
+| **PeerMacro** | Emitir declaraciones hermanas | [`MakeBuilderMacro.swift`](Sources/BeyondBoilerplateMacros/MakeBuilderMacro.swift) |
+| **AccessorMacro** | Adjuntar get/set/didSet/… | [`LoggedMacro.swift`](Sources/BeyondBoilerplateMacros/LoggedMacro.swift), [`ClampedMacro.swift`](Sources/BeyondBoilerplateMacros/ClampedMacro.swift) |
+| **ExtensionMacro** | Añadir extensions / conformances | [`AutoEquatableMacro.swift`](Sources/BeyondBoilerplateMacros/AutoEquatableMacro.swift) |
+| **Multi-role** | Un atributo, varios protocolos | `@Clamped`, `@Endpoint`, `@AnalyticsEvent` |
 
-Public declarations live in [`Macros.swift`](Sources/BeyondBoilerplateMacrosClient/Macros.swift).
+Las declaraciones públicas viven en [`Macros.swift`](Sources/BeyondBoilerplateMacrosClient/Macros.swift).
 
 ---
 
-## 4. Production demos — BEFORE / AFTER
+## 4. Demos de producción — BEFORE / AFTER
 
 ### 4.1 Networking — `@Endpoint`
 
-**BEFORE (manual boilerplate every time):**
+**BEFORE (boilerplate manual cada vez):**
 
 ```swift
 struct GetRestaurants: EndpointProtocol {
@@ -233,7 +233,7 @@ struct GetRestaurants: EndpointProtocol {
 }
 ```
 
-**AFTER (what you write):**
+**AFTER (lo que escribes):**
 
 ```swift
 @Endpoint(method: .get, path: "/restaurants")
@@ -243,7 +243,7 @@ struct GetRestaurants {
 }
 ```
 
-**AFTER (what Expand Macro / tests show — real expansion):**
+**AFTER (lo que muestran Expand Macro / tests — expansión real):**
 
 ```swift
 struct GetRestaurants {
@@ -276,20 +276,20 @@ extension GetRestaurants: EndpointProtocol {
 }
 ```
 
-**Why each piece exists**
+**Por qué existe cada pieza**
 
 | Generated piece | Why |
 |-----------------|-----|
-| `endpointID` | Stable key for stubs / logging without stringly path coupling |
-| `method` / `path` | From macro arguments — validated as literals where helpful |
-| `queryItems` | Derived from stored properties — structural mapping macros excel at |
-| `EndpointProtocol` extension | Lets `InMemoryHTTPClient` stay generic |
+| `endpointID` | Clave estable para stubs / logging sin acoplar al path como string |
+| `method` / `path` | Desde argumentos del macro — validados como literales cuando ayuda |
+| `queryItems` | Derivados de propiedades almacenadas — los macros de mapeo estructural destacan aquí |
+| Extensión `EndpointProtocol` | Permite que `InMemoryHTTPClient` se mantenga genérico |
 
-Invalid configs emit **helpful diagnostics** (empty path, enum attachment, missing args) — see tests.
+Las configs inválidas emiten **diagnósticos útiles** (path vacío, adjunto a enum, args faltantes) — ver tests.
 
 ### 4.2 Analytics — `@AnalyticsEvent`
 
-**BEFORE:** hand-written `eventName` + `[String: String]` dictionaries that drift from property names.
+**BEFORE:** `eventName` + diccionarios `[String: String]` escritos a mano que se desalinean de los nombres de propiedades.
 
 **AFTER:**
 
@@ -301,9 +301,9 @@ struct RestaurantOpened {
 }
 ```
 
-Expands to `eventName` (`restaurant_opened`), `parameters`, `payloadDescription`, and `AnalyticsEventProtocol` — no vendor SDK.
+Expande a `eventName` (`restaurant_opened`), `parameters`, `payloadDescription` y `AnalyticsEventProtocol` — sin SDK de vendor.
 
-### 4.3 Educational DI — `@AutoRegister`
+### 4.3 DI educativa — `@AutoRegister`
 
 ```swift
 @AutoRegister
@@ -312,7 +312,7 @@ struct MenuRepository {
 }
 ```
 
-Expands to:
+Expande a:
 
 ```swift
 public static func register(in container: DependencyContainer) {
@@ -322,22 +322,22 @@ public static func register(in container: DependencyContainer) {
 }
 ```
 
-#### Magic, maintainability, debugging
+#### Magia, mantenibilidad, debugging
 
 | Question | Guidance |
 |----------|----------|
-| Is auto-registration “free”? | No — call sites still need `Type.register(in:)` (or a scanner you maintain) |
-| When is it OK? | Homogeneous services with a clear composition root |
-| When write registrations manually? | Test overrides, multi-binding, conditional environments, debugging “who created this?” |
-| Failure mode | Missing `init()` → runtime `fatalError` in this tiny container — macros cannot always see full type-checker info |
+| ¿El auto-registro es “gratis”? | No — los call sites aún necesitan `Type.register(in:)` (o un scanner que mantengas) |
+| ¿Cuándo está bien? | Servicios homogéneos con un composition root claro |
+| ¿Cuándo escribir registros a mano? | Overrides de test, multi-binding, entornos condicionales, debugging de “¿quién creó esto?” |
+| Modo de fallo | Falta `init()` → `fatalError` en runtime en este contenedor pequeño — los macros no siempre ven la info completa del type-checker |
 
-**Talking point:** macros should reduce *noise*, not hide *architecture*.
+**Punto de la charla:** los macros deben reducir *ruido*, no ocultar *arquitectura*.
 
 ---
 
-## 5. SwiftSyntaxBuilder notes
+## 5. Notas de SwiftSyntaxBuilder
 
-Used heavily for readable expansions:
+Usado mucho para expansiones legibles:
 
 ```swift
 let initializer: DeclSyntax = """
@@ -349,115 +349,115 @@ let initializer: DeclSyntax = """
 
 | Technique | When |
 |-----------|------|
-| `DeclSyntax` / `ExtensionDeclSyntax` interpolation | Fast, stage-readable expansions |
-| `\(literal:)` | Safe string/int literals in generated code |
-| `\(raw:)` | Splice already-built Swift fragments |
-| Typed helpers (`StoredProperty.collect`) | Shared analysis without copy-paste |
+| Interpolación `DeclSyntax` / `ExtensionDeclSyntax` | Expansiones rápidas y legibles en el escenario |
+| `\(literal:)` | Literales string/int seguros en el código generado |
+| `\(raw:)` | Empalmar fragmentos de Swift ya construidos |
+| Helpers tipados (`StoredProperty.collect`) | Análisis compartido sin copy-paste |
 
-Prefer clarity over clever AST surgery for conference macros.
-
----
-
-## 6. Production considerations
-
-1. **Type safety** — expanded code is real Swift; the type checker is your backstop.  
-2. **Compile-time guarantees** — bad attributes should **fail the build** with diagnostics, not surprise you at runtime.  
-3. **Diagnostics example** — `@AutoInit` on an enum:
-
-   > `@AutoInit can only be attached to a struct. Enums and classes already have richer initialization rules—write those inits by hand.`
-
-4. **Generated code quality** — Expand Macro in review; keep expansions small enough to explain live.  
-5. **Build times** — each macro plugin process + expansion costs; measure before decorating every type in an app.  
-6. **API design** — avoid “magic global scanners”; prefer explicit arguments (`method:`, `path:`).  
-7. **Debugging** — Xcode: right-click → **Expand Macro**. CLI: `swift run DemoCLI wow` prints the conceptual expansion.
+Prefiere claridad sobre cirugía AST ingeniosa para macros de conferencia.
 
 ---
 
-## 7. When NOT to use macros
+## 6. Consideraciones de producción
+
+1. **Type safety** — el código expandido es Swift real; el type checker es tu red de seguridad.  
+2. **Garantías en compile-time** — atributos malos deben **fallar el build** con diagnósticos, no sorprenderte en runtime.  
+3. **Ejemplo de diagnóstico** — `@AutoInit` en un enum:
+
+   > `@AutoInit solo se puede adjuntar a un struct. Los enums y las classes ya tienen reglas de inicialización más ricas—escribe esos inits a mano.`
+
+4. **Calidad del código generado** — Expand Macro en review; mantén las expansiones lo bastante pequeñas para explicarlas en vivo.  
+5. **Tiempos de build** — cada proceso de plugin de macro + expansión tiene costo; mide antes de decorar cada tipo de una app.  
+6. **Diseño de API** — evita “scanners globales mágicos”; prefiere argumentos explícitos (`method:`, `path:`).  
+7. **Debugging** — Xcode: clic derecho → **Expand Macro**. CLI: `swift run DemoCLI wow` imprime la expansión conceptual.
+
+---
+
+## 7. Cuándo NO usar macros
 
 | Temptation | Prefer instead |
 |------------|----------------|
-| Business rules / pricing / auth policy | Ordinary functions & types |
-| Complex algorithms | Testable pure Swift |
-| Dynamic behavior depending on runtime values | Runtime code / protocols |
-| Saving three lines once | Just write the three lines |
-| Hiding architecture behind “framework magic” | Explicit composition roots |
-| Auto-`Codable` / auto-`Hashable` for every model | Manual or carefully scoped codegen — edge cases abound |
+| Reglas de negocio / precios / política de auth | Funciones y tipos ordinarios |
+| Algoritmos complejos | Swift puro testeable |
+| Comportamiento dinámico que depende de valores en runtime | Código en runtime / protocolos |
+| Ahorrar tres líneas una sola vez | Solo escribe las tres líneas |
+| Ocultar arquitectura detrás de “magia de framework” | Composition roots explícitos |
+| Auto-`Codable` / auto-`Hashable` para cada modelo | Manual o codegen con alcance cuidadoso — abundan los edge cases |
 
-**Decision guidance:** use a macro when the transformation is **structural, repetitive, locally reasoned from syntax**, and you can ship **excellent diagnostics**.
+**Guía de decisión:** usa un macro cuando la transformación es **estructural, repetitiva, razonada localmente desde la sintaxis**, y puedes entregar **diagnósticos excelentes**.
 
 ---
 
-## 8. Comparison table
+## 8. Tabla de comparación
 
 | Problem | Function | Protocol / Generic | Macro | External codegen | Reflection |
 |---------|----------|--------------------|-------|------------------|------------|
-| Reuse an algorithm | ✅ | ✅ | ❌ overkill | ❌ | ❌ |
-| Polymorphic behavior | ✅ | ✅ best | ❌ | ❌ | fragile |
-| Emit members/conformances from shape of a type | ❌ | limited | ✅ | ✅ | ❌ |
-| Capture source text of an expression | ❌ | ❌ | ✅ `#stringify` | ❌ | ❌ |
-| Cross-language / multi-file templates | ❌ | ❌ | limited | ✅ | ❌ |
-| Inspect unknown types at runtime | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Reutilizar un algoritmo | ✅ | ✅ | ❌ overkill | ❌ | ❌ |
+| Comportamiento polimórfico | ✅ | ✅ best | ❌ | ❌ | fragile |
+| Emitir members/conformances desde la forma de un tipo | ❌ | limited | ✅ | ✅ | ❌ |
+| Capturar el texto fuente de una expresión | ❌ | ❌ | ✅ `#stringify` | ❌ | ❌ |
+| Templates cross-language / multi-file | ❌ | ❌ | limited | ✅ | ❌ |
+| Inspeccionar tipos desconocidos en runtime | ❌ | ❌ | ❌ | ❌ | ✅ |
 
 ---
 
-## 9. Progressive learning — LEVEL 1–9
+## 9. Aprendizaje progresivo — LEVEL 1–9
 
 | Level | Focus | Run |
 |------|-------|-----|
 | **1** | Freestanding `#stringify` — AST → `(value, "source")` | `DemoCLI levels` |
-| **2** | `@AutoInit` MemberMacro — optionals default to `nil` | |
-| **3** | `@MakeBuilder` PeerMacro — sibling Builder, access-level aware | |
+| **2** | `@AutoInit` MemberMacro — optionals default a `nil` | |
+| **3** | `@MakeBuilder` PeerMacro — Builder hermano, consciente del access-level | |
 | **4** | `@Logged` / `@Clamped` AccessorMacro (+ Peer storage) | |
-| **5** | `@AutoEquatable` ExtensionMacro — **limitations** called out | |
-| **6** | `@Endpoint` production networking shape | |
-| **7** | `@AnalyticsEvent` typed → dictionary payload | |
-| **8** | `@AutoRegister` educational DI + debate | |
-| **9** | When **not** to use macros — decision checklist | |
+| **5** | `@AutoEquatable` ExtensionMacro — se señalan las **limitaciones** | |
+| **6** | Forma de networking de producción `@Endpoint` | |
+| **7** | `@AnalyticsEvent` tipado → payload diccionario | |
+| **8** | DI educativa `@AutoRegister` + debate | |
+| **9** | Cuándo **no** usar macros — checklist de decisión | |
 
-Implementation map: [`Sources/BeyondBoilerplateMacros/`](Sources/BeyondBoilerplateMacros/).
+Mapa de implementación: [`Sources/BeyondBoilerplateMacros/`](Sources/BeyondBoilerplateMacros/).
 
 ---
 
-## 10. Conference demo script (30–45 min)
+## 10. Guion de demo de conferencia (30–45 min)
 
 | Segment | Time | Show | Run | Explain | Audience takeaway |
 |---------|------|------|-----|---------|-------------------|
-| **Problem** | 3 min | Manual endpoint boilerplate slide / README BEFORE | — | Review noise, typos, drift | Boilerplate is a product risk |
-| **Boilerplate tax** | 3 min | Multiply by N endpoints | — | Humans copy-paste badly | Structure wants automation |
-| **First macro** | 4 min | `#stringify` in DemoCLI / Xcode | `levels` L1 | ExpressionMacro + source text | Macros see syntax |
-| **SwiftSyntax** | 5 min | Tree diagram in README | — | Nodes, decls, attributes | You are editing a tree |
-| **Expansion** | 4 min | Expand Macro on `@AutoInit` | L2–L3 | Member vs Peer | Role choice matters |
-| **Production macro** | 8 min | `@Endpoint` BEFORE→AFTER | `wow` | Arguments, query mapping, protocol | Small expansions win |
-| **Diagnostics** | 4 min | Break `@Endpoint` path / `@AutoInit` on enum | tests or Xcode | Actionable messages | Trust = diagnostics |
-| **Testing** | 4 min | `BeyondBoilerplateMacrosTests` | `swift test` | MacroTesting snapshots | Treat expansions as API |
-| **Limitations** | 4 min | `@AutoEquatable` / `@AutoRegister` debate | L5, L8 | Magic vs maintainability | Know the escape hatches |
-| **Lessons** | 3 min | LEVEL 9 checklist | L9 | Decision table | Macros are a sharp tool |
+| **Problem** | 3 min | Slide de boilerplate manual de endpoint / README BEFORE | — | Ruido de review, typos, drift | El boilerplate es un riesgo de producto |
+| **Boilerplate tax** | 3 min | Multiplicar por N endpoints | — | Los humanos copian-pegan mal | La estructura pide automatización |
+| **First macro** | 4 min | `#stringify` en DemoCLI / Xcode | `levels` L1 | ExpressionMacro + texto fuente | Los macros ven la sintaxis |
+| **SwiftSyntax** | 5 min | Diagrama de árbol en el README | — | Nodes, decls, attributes | Estás editando un árbol |
+| **Expansion** | 4 min | Expand Macro en `@AutoInit` | L2–L3 | Member vs Peer | La elección de rol importa |
+| **Production macro** | 8 min | `@Endpoint` BEFORE→AFTER | `wow` | Argumentos, mapeo de query, protocolo | Las expansiones pequeñas ganan |
+| **Diagnostics** | 4 min | Romper path de `@Endpoint` / `@AutoInit` en enum | tests o Xcode | Mensajes accionables | Confianza = diagnósticos |
+| **Testing** | 4 min | `BeyondBoilerplateMacrosTests` | `swift test` | Snapshots de MacroTesting | Trata las expansiones como API |
+| **Limitations** | 4 min | Debate `@AutoEquatable` / `@AutoRegister` | L5, L8 | Magia vs mantenibilidad | Conoce las salidas de escape |
+| **Lessons** | 3 min | Checklist LEVEL 9 | L9 | Tabla de decisión | Los macros son una herramienta afilada |
 
-**WOW moment (segment core):**  
-1. Show verbose manual endpoint.  
-2. Replace with `@Endpoint`.  
-3. Expand Macro / `swift run DemoCLI wow` — “this is what the compiler generated.”  
-4. Hit `InMemoryHTTPClient` — applause, still offline.
+**Momento WOW (núcleo del segmento):**  
+1. Mostrar el endpoint manual verboso.  
+2. Reemplazar con `@Endpoint`.  
+3. Expand Macro / `swift run DemoCLI wow` — “esto es lo que generó el compilador.”  
+4. Golpear `InMemoryHTTPClient` — aplausos, sigue offline.
 
 ---
 
-## 11. WOW moment (offline)
+## 11. Momento WOW (offline)
 
 ```bash
 swift run DemoCLI wow
 ```
 
-Prints: manual boilerplate → `@Endpoint` → generated-equivalent members → offline JSON response for Leeds / SwiftLeeds vibes.
+Imprime: boilerplate manual → `@Endpoint` → members equivalentes generados → respuesta JSON offline con vibes de Leeds / SwiftLeeds.
 
-In Xcode: open `Apps/BeyondBoilerplateDemo/.../DemoModels.swift` (or `Sources/DemoCLI/main.swift`), right-click `@Endpoint` → **Expand Macro**.  
-On stage, prefer the iOS app so the audience sees the expansion *and* a restaurant list from `InMemoryHTTPClient`.
+En Xcode: abre `Apps/BeyondBoilerplateDemo/.../DemoModels.swift` (o `Sources/DemoCLI/main.swift`), clic derecho en `@Endpoint` → **Expand Macro**.  
+En el escenario, prefiere la app iOS para que la audiencia vea la expansión *y* una lista de restaurantes desde `InMemoryHTTPClient`.
 
 ---
 
-## 12. Testing macros
+## 12. Testing de macros
 
-Uses [MacroTesting](https://github.com/pointfreeco/swift-macro-testing) with Swift Testing:
+Usa [MacroTesting](https://github.com/pointfreeco/swift-macro-testing) con Swift Testing:
 
 ```swift
 assertMacro {
@@ -471,7 +471,7 @@ assertMacro {
 }
 ```
 
-Diagnostic tests assert the **underlined message**, not a generic “macro failed.”
+Los tests de diagnóstico afirman el **mensaje subrayado**, no un genérico “macro failed.”
 
 ```bash
 swift test
@@ -480,27 +480,27 @@ swift test
 
 ---
 
-## Macros quick index
+## Índice rápido de macros
 
 | Macro | Kind(s) | Intent |
 |-------|---------|--------|
-| `#stringify` | Expression | Teaching — value + source text |
-| `@AutoInit` | Member | Memberwise `init` (optionals → `nil`) |
-| `@MakeBuilder` | Peer | `TypeBuilder` sibling |
-| `@Logged` | Accessor (`didSet`) | Observe writes |
-| `@Clamped(min:max:)` | Accessor + Peer | Bound numeric storage |
-| `@AutoEquatable` | Extension (+ Member role) | Stored-property `==` |
-| `@Endpoint(method:path:)` | Member + Extension | Networking envelope |
-| `@AnalyticsEvent` | Member + Extension | Event name + parameters |
+| `#stringify` | Expression | Enseñanza — valor + texto fuente |
+| `@AutoInit` | Member | `init` memberwise (optionals → `nil`) |
+| `@MakeBuilder` | Peer | Sibling `TypeBuilder` |
+| `@Logged` | Accessor (`didSet`) | Observar escrituras |
+| `@Clamped(min:max:)` | Accessor + Peer | Storage numérico acotado |
+| `@AutoEquatable` | Extension (+ rol Member) | `==` por propiedades almacenadas |
+| `@Endpoint(method:path:)` | Member + Extension | Envelope de networking |
+| `@AnalyticsEvent` | Member + Extension | Nombre de evento + parameters |
 | `@AutoRegister` | Member | `register(in: DependencyContainer)` |
 
 ---
 
-## License / talk credit
+## License / crédito de la charla
 
-Educational material for **Kevin Morales** — DevFest / London / SwiftLeeds.  
-Feel free to fork for workshops; keep attribution in talk abstracts when you reuse the laboratory.
+Material educativo para **Kevin Morales** — DevFest / London / SwiftLeeds.  
+Siéntete libre de hacer fork para workshops; mantén la atribución en abstracts de charlas cuando reutilices el laboratorio.
 
 ---
 
-**Start here on stage:** `open Apps/BeyondBoilerplateDemo/BeyondBoilerplateDemo.xcodeproj` → Run on Simulator → Expand Macro on `@Endpoint` in `DemoModels.swift` → (optional) `swift run DemoCLI wow` for the terminal twin.
+**Empieza aquí en el escenario:** `open Apps/BeyondBoilerplateDemo/BeyondBoilerplateDemo.xcodeproj` → Run en Simulator → Expand Macro en `@Endpoint` en `DemoModels.swift` → (opcional) `swift run DemoCLI wow` para el gemelo de terminal.

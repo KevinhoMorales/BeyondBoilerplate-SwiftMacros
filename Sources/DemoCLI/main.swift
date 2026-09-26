@@ -2,7 +2,7 @@ import BeyondBoilerplateMacrosClient
 import DemoSupport
 import Foundation
 
-// MARK: - Demo model types (annotated for live expansion)
+// MARK: - Tipos modelo de demo (anotados para expansión en vivo)
 
 @AutoInit
 @MakeBuilder
@@ -59,7 +59,7 @@ struct DemoCLI {
         case "help", "--help", "-h":
             printHelp()
         default:
-            print("Unknown mode '\(mode)'.\n")
+            print("Modo desconocido '\(mode)'.\n")
             printHelp()
         }
     }
@@ -69,23 +69,23 @@ struct DemoCLI {
             """
             DemoCLI — Beyond Boilerplate: Building Production-Ready Swift Macros
 
-            Usage:
-              swift run DemoCLI           # WOW conference path (default)
-              swift run DemoCLI wow       # same
-              swift run DemoCLI levels    # progressive LEVEL 1–9 walkthrough
+            Uso:
+              swift run DemoCLI           # ruta WOW de conferencia (default)
+              swift run DemoCLI wow       # igual
+              swift run DemoCLI levels    # recorrido progresivo LEVEL 1–9
               swift run DemoCLI help
 
-            Fully offline. No network. Expand Macro in Xcode for source-level expansions.
+            Totalmente offline. Sin red. Expand Macro en Xcode para expansiones a nivel de fuente.
             """
         )
     }
 }
 
-// MARK: - Progressive levels
+// MARK: - Niveles progresivos
 
 extension DemoCLI {
     static func runAllLevels() {
-        banner("PROGRESSIVE LABORATORY — LEVELS 1–9")
+        banner("LABORATORIO PROGRESIVO — LEVELS 1–9")
 
         level1_Stringify()
         level2_AutoInit()
@@ -97,24 +97,24 @@ extension DemoCLI {
         level8_AutoRegister()
         level9_DecisionGuidance()
 
-        banner("END OF LEVELS — try: swift run DemoCLI wow")
+        banner("FIN DE LEVELS — prueba: swift run DemoCLI wow")
     }
 
     static func level1_Stringify() {
-        section("LEVEL 1 — Freestanding ExpressionMacro: #stringify")
+        section("LEVEL 1 — ExpressionMacro freestanding: #stringify")
         let answer = 21
         let (value, source) = #stringify(answer * 2)
-        print("  Expanded idea: (answer * 2, \"answer * 2\")")
-        print("  Runtime value: \(value)")
-        print("  Captured source text: \(source)")
-        print("  Takeaway: macros see the AST / source text at compile time.")
+        print("  Idea expandida: (answer * 2, \"answer * 2\")")
+        print("  Valor en runtime: \(value)")
+        print("  Texto fuente capturado: \(source)")
+        print("  Conclusión: los macros ven el AST / texto fuente en compile-time.")
     }
 
     static func level2_AutoInit() {
         section("LEVEL 2 — MemberMacro: @AutoInit")
         let restaurant = Restaurant(id: "r1", name: "Soda Tapia", city: "San José", rating: 4.8)
-        print("  Built with generated memberwise init: \(restaurant)")
-        print("  Takeaway: MemberMacro emits members *inside* the type.")
+        print("  Construido con init memberwise generado: \(restaurant)")
+        print("  Conclusión: MemberMacro emite members *dentro* del tipo.")
     }
 
     static func level3_MakeBuilder() {
@@ -127,9 +127,9 @@ extension DemoCLI {
                 builder.rating = 4.5
             }
             .build()
-        print("  Peer type RestaurantBuilder emitted beside Restaurant.")
-        print("  Built: \(restaurant)")
-        print("  Takeaway: PeerMacro creates sibling declarations at the same scope.")
+        print("  Tipo peer RestaurantBuilder emitido junto a Restaurant.")
+        print("  Construido: \(restaurant)")
+        print("  Conclusión: PeerMacro crea declaraciones hermanas en el mismo scope.")
     }
 
     static func level4_LoggedAndClamped() {
@@ -138,7 +138,7 @@ extension DemoCLI {
         control.level = 3
         control.percentage = 99
         print("  Clamped 99 → \(control.percentage) (max 10)")
-        print("  Takeaway: accessors can observe (didSet) or replace get/set (Clamped + peer storage).")
+        print("  Conclusión: los accessors pueden observar (didSet) o reemplazar get/set (Clamped + peer storage).")
     }
 
     static func level5_AutoEquatable() {
@@ -146,11 +146,11 @@ extension DemoCLI {
         let a = Restaurant(id: "x", name: "A", city: "Cartago", rating: nil)
         let b = Restaurant(id: "x", name: "A", city: "Cartago", rating: nil)
         print("  a == b → \(a == b)")
-        print("  LIMITATION: great for simple value structs; do NOT auto-gen Codable/Hashable blindly.")
+        print("  LIMITACIÓN: genial para value structs simples; NO auto-generes Codable/Hashable a ciegas.")
     }
 
     static func level6_Endpoint() {
-        section("LEVEL 6 — Production: @Endpoint")
+        section("LEVEL 6 — Producción: @Endpoint")
         let endpoint = GetRestaurants(city: "London", limit: 5)
         print("  \(endpoint.requestDescription)")
         print("  query: \(endpoint.queryItems)")
@@ -162,55 +162,55 @@ extension DemoCLI {
             )
             let response = try client.send(endpoint)
             let text = String(data: response.body, encoding: .utf8) ?? ""
-            print("  Offline response (\(response.statusCode)):\n\(text)")
+            print("  Respuesta offline (\(response.statusCode)):\n\(text)")
         } catch {
             print("  error: \(error)")
         }
     }
 
     static func level7_Analytics() {
-        section("LEVEL 7 — Production: @AnalyticsEvent")
+        section("LEVEL 7 — Producción: @AnalyticsEvent")
         let event = RestaurantOpened(restaurantID: "r1", source: "search")
         let analytics = InMemoryAnalytics()
         analytics.track(event)
         print("  \(event.payloadDescription)")
-        print("  Recorded events: \(analytics.events.count)")
+        print("  Eventos registrados: \(analytics.events.count)")
     }
 
     static func level8_AutoRegister() {
-        section("LEVEL 8 — Production (educational DI): @AutoRegister")
+        section("LEVEL 8 — Producción (DI educativa): @AutoRegister")
         let container = DependencyContainer()
         MenuRepository.register(in: container)
         let repo = container.resolve(MenuRepository.self)
         print("  \(repo.featured())")
-        print("  Debate on stage: magic registration vs explicit composition roots.")
+        print("  Debate en el escenario: registro mágico vs composition roots explícitos.")
     }
 
     static func level9_DecisionGuidance() {
-        section("LEVEL 9 — When NOT to use macros")
+        section("LEVEL 9 — Cuándo NO usar macros")
         print(
             """
-              Prefer a function when you are saving ~3 lines once.
-              Prefer protocols/generics for polymorphic behavior.
-              Prefer manual code for business rules and complex algorithms.
-              Prefer macros for repetitive, structural, locally-reasoned boilerplate
-              with excellent diagnostics — networking envelopes, lens code, typed events.
+              Prefiere una función cuando ahorras ~3 líneas una sola vez.
+              Prefiere protocolos/generics para comportamiento polimórfico.
+              Prefiere código manual para reglas de negocio y algoritmos complejos.
+              Prefiere macros para boilerplate repetitivo, estructural y razonado localmente
+              con diagnósticos excelentes — envelopes de networking, lens code, eventos tipados.
             """
         )
     }
 }
 
-// MARK: - WOW conference path
+// MARK: - Ruta WOW de conferencia
 
 extension DemoCLI {
     static func runWowPath() {
-        banner("WOW PATH — boilerplate → macro → generated equivalent")
+        banner("RUTA WOW — boilerplate → macro → equivalente generado")
 
         print(
             """
 
-            ── 1. THE PROBLEM (verbose manual endpoint) ─────────────────────────
-            Imagine writing this by hand for every API call:
+            ── 1. EL PROBLEMA (endpoint manual verboso) ─────────────────────────
+            Imagina escribir esto a mano para cada llamada de API:
 
             struct GetRestaurantsManual: EndpointProtocol {
                 let city: String
@@ -230,13 +230,13 @@ extension DemoCLI {
                 }
             }
 
-            Multiply by dozens of endpoints. Typos in paths. Drift in IDs. Review noise.
+            Multiplica por docenas de endpoints. Typos en paths. Drift en IDs. Ruido de review.
             """
         )
 
         print(
             """
-            ── 2. THE MACRO ─────────────────────────────────────────────────────
+            ── 2. EL MACRO ──────────────────────────────────────────────────────
             @Endpoint(method: .get, path: "/restaurants")
             struct GetRestaurants {
                 let city: String
@@ -246,9 +246,9 @@ extension DemoCLI {
         )
 
         let endpoint = GetRestaurants(city: "Leeds", limit: 3)
-        print("── 3. WHAT THE COMPILER GENERATED (conceptual Expand Macro) ───────")
+        print("── 3. LO QUE GENERÓ EL COMPILADOR (Expand Macro conceptual) ───────")
         print(generatedEndpointExpansionPrintout())
-        print("── 4. RUNTIME (fully offline InMemoryHTTPClient) ──────────────────")
+        print("── 4. RUNTIME (InMemoryHTTPClient totalmente offline) ─────────────")
         print("  \(endpoint.requestDescription)")
 
         let client = InMemoryHTTPClient()
@@ -270,16 +270,16 @@ extension DemoCLI {
         print(
             """
 
-            ── 5. AUDIENCE TAKEAWAY ─────────────────────────────────────────────
-            Macros delete *structural* boilerplate while keeping types in the driver's seat.
-            Always Expand Macro. Always ship diagnostics. Always know when NOT to use them.
+            ── 5. CONCLUSIÓN PARA LA AUDIENCIA ──────────────────────────────────
+            Los macros eliminan boilerplate *estructural* manteniendo los tipos al volante.
+            Siempre Expand Macro. Siempre entrega diagnósticos. Siempre sabe cuándo NO usarlos.
 
-            Next: swift run DemoCLI levels
+            Siguiente: swift run DemoCLI levels
             """
         )
     }
 
-    /// Printed expansion must match what EndpointMacro actually emits (keep in sync with tests/README).
+    /// La expansión impresa debe coincidir con lo que EndpointMacro emite realmente (mantén sync con tests/README).
     static func generatedEndpointExpansionPrintout() -> String {
         """
           // members

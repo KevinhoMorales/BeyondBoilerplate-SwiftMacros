@@ -1,20 +1,20 @@
-# Docs — optional talk companion
+# Docs — compañero opcional de la charla
 
-Primary teaching lives in the root [`README.md`](../README.md).  
-Use this folder for speaker notes, slide cues, or translated abstracts later (Spanish DevFest talk) without bloating the main README.
+La enseñanza principal vive en el [`README.md`](../README.md) de la raíz.  
+Usa esta carpeta para notas del speaker, cues de slides o abstracts traducidos más adelante sin inflar el README principal.
 
-## Suggested slide cues
+## Cues sugeridos de slides
 
 1. Pipeline ASCII (README §1)
-2. SwiftSyntax tree for `struct User`
-3. Macro kind table with file links
-4. `@Endpoint` BEFORE / AFTER (must match tests)
-5. Diagnostics screenshot from Xcode
-6. When NOT to use macros checklist
-7. WOW: iOS app restaurant list + Expand Macro on `@Endpoint` (DemoModels.swift)
-8. Optional twin: DemoCLI `wow` output
+2. Árbol SwiftSyntax para `struct User`
+3. Tabla de tipos de macro con links a archivos
+4. `@Endpoint` BEFORE / AFTER (debe coincidir con tests)
+5. Screenshot de diagnósticos desde Xcode
+6. Checklist de cuándo NO usar macros
+7. WOW: lista de restaurantes en la app iOS + Expand Macro en `@Endpoint` (DemoModels.swift)
+8. Gemelo opcional: salida `wow` de DemoCLI
 
-## Spanish delivery note
+## Nota de entrega
 
-Code, comments, CLI, README, and iOS UI strings stay English for London/SwiftLeeds reuse.  
-Oral explanation can be Spanish; point at English Expand Macro text on screen.
+**Español para DevFest ahora; inglés para SwiftLeeds más adelante.**  
+README, comentarios educativos, strings de CLI y UI de iOS están en español. Identificadores Swift, nombres de macros, rutas, comandos y URLs permanecen en inglés.
