@@ -1,0 +1,327 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A11E0B01A01E000000000001 /* BeyondBoilerplateDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11E0B01A01E000000000001 /* BeyondBoilerplateDemoApp.swift */; };
+		A11E0B01A01E000000000002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11E0B01A01E000000000002 /* ContentView.swift */; };
+		A11E0B01A01E000000000003 /* Examples.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11E0B01A01E000000000003 /* Examples.swift */; };
+		A11E0B01A01E000000000007 /* Levels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11E0B01A01E000000000007 /* Levels.swift */; };
+		5ECA7915BC216AB6F4598648 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C48D6C2371303BAA75291FC8 /* Assets.xcassets */; };
+		682AB6CF541EAA1BFB0B081C /* BeyondBoilerplateMacrosClient in Frameworks */ = {isa = PBXBuildFile; productRef = FDACBA1506AEFFCB129CB14C /* BeyondBoilerplateMacrosClient */; };
+		D3F5F8B905E126CF723CC918 /* DemoSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 80DA7AB4448BD7D62312C417 /* DemoSupport */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B11E0B01A01E000000000001 /* BeyondBoilerplateDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeyondBoilerplateDemoApp.swift; sourceTree = "<group>"; };
+		B11E0B01A01E000000000002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B11E0B01A01E000000000003 /* Examples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Examples.swift; sourceTree = "<group>"; };
+		B11E0B01A01E000000000007 /* Levels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Levels.swift; sourceTree = "<group>"; };
+		C48D6C2371303BAA75291FC8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6275CA3A66E5A5551F9AE061 /* BeyondBoilerplateDemo.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = BeyondBoilerplateDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F514B4980F5599340ACD0BF9 /* BeyondBoilerplate-SwiftMacros */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "BeyondBoilerplate-SwiftMacros"; path = ../..; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		89F5528DA914DDDC6F7EF531 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				682AB6CF541EAA1BFB0B081C /* BeyondBoilerplateMacrosClient in Frameworks */,
+				D3F5F8B905E126CF723CC918 /* DemoSupport in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		47EB0B67064B92BC01CB5BB9 /* BeyondBoilerplateDemo */ = {
+			isa = PBXGroup;
+			children = (
+				C48D6C2371303BAA75291FC8 /* Assets.xcassets */,
+				B11E0B01A01E000000000001 /* BeyondBoilerplateDemoApp.swift */,
+				B11E0B01A01E000000000002 /* ContentView.swift */,
+				B11E0B01A01E000000000003 /* Examples.swift */,
+				B11E0B01A01E000000000007 /* Levels.swift */,
+			);
+			path = BeyondBoilerplateDemo;
+			sourceTree = "<group>";
+		};
+		657CD3228D6AA835535A607A = {
+			isa = PBXGroup;
+			children = (
+				47EB0B67064B92BC01CB5BB9 /* BeyondBoilerplateDemo */,
+				D7090080EDB755BFD20B8012 /* Packages */,
+				B566BC3E132D7FE2A04289F3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B566BC3E132D7FE2A04289F3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6275CA3A66E5A5551F9AE061 /* BeyondBoilerplateDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D7090080EDB755BFD20B8012 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				F514B4980F5599340ACD0BF9 /* BeyondBoilerplate-SwiftMacros */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BF89F0C4EF10B4D0C0D4DD15 /* BeyondBoilerplateDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 52E912CAF61ACB76078E0ADE /* Build configuration list for PBXNativeTarget "BeyondBoilerplateDemo" */;
+			buildPhases = (
+				B27513563622B8FC4344ADA8 /* Sources */,
+				66E5888830C2268791BC8FD5 /* Resources */,
+				89F5528DA914DDDC6F7EF531 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BeyondBoilerplateDemo;
+			packageProductDependencies = (
+				FDACBA1506AEFFCB129CB14C /* BeyondBoilerplateMacrosClient */,
+				80DA7AB4448BD7D62312C417 /* DemoSupport */,
+			);
+			productName = BeyondBoilerplateDemo;
+			productReference = 6275CA3A66E5A5551F9AE061 /* BeyondBoilerplateDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		98290B85DAD05764E0B566C7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					BF89F0C4EF10B4D0C0D4DD15 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = F475DEA99D716328A151805D /* Build configuration list for PBXProject "BeyondBoilerplateDemo" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 657CD3228D6AA835535A607A;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				1B42CCD5B9310C3B65754884 /* XCLocalSwiftPackageReference "../.." */,
+			);
+			preferredProjectObjectVersion = 77;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BF89F0C4EF10B4D0C0D4DD15 /* BeyondBoilerplateDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		66E5888830C2268791BC8FD5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5ECA7915BC216AB6F4598648 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B27513563622B8FC4344ADA8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A11E0B01A01E000000000001 /* BeyondBoilerplateDemoApp.swift in Sources */,
+				A11E0B01A01E000000000002 /* ContentView.swift in Sources */,
+				A11E0B01A01E000000000003 /* Examples.swift in Sources */,
+				A11E0B01A01E000000000007 /* Levels.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		3C9DE8665FE604127DB33BAA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Beyond Boilerplate";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kevinmorales.BeyondBoilerplateDemo;
+				PRODUCT_NAME = BeyondBoilerplateDemo;
+				SDKROOT = iphoneos;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		715C272A72C9F612D609CB4E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BASE_SDK = iphoneos;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		9DAFB16E300B7D4DEACDF8B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Beyond Boilerplate";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kevinmorales.BeyondBoilerplateDemo;
+				PRODUCT_NAME = BeyondBoilerplateDemo;
+				SDKROOT = iphoneos;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		D61D30FCFB2DAA3323C63861 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BASE_SDK = iphoneos;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		52E912CAF61ACB76078E0ADE /* Build configuration list for PBXNativeTarget "BeyondBoilerplateDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3C9DE8665FE604127DB33BAA /* Debug */,
+				9DAFB16E300B7D4DEACDF8B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		F475DEA99D716328A151805D /* Build configuration list for PBXProject "BeyondBoilerplateDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D61D30FCFB2DAA3323C63861 /* Debug */,
+				715C272A72C9F612D609CB4E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		1B42CCD5B9310C3B65754884 /* XCLocalSwiftPackageReference "../.." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../..;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		80DA7AB4448BD7D62312C417 /* DemoSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DemoSupport;
+		};
+		FDACBA1506AEFFCB129CB14C /* BeyondBoilerplateMacrosClient */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = BeyondBoilerplateMacrosClient;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 98290B85DAD05764E0B566C7 /* Project object */;
+}
